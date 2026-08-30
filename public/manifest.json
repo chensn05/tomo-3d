@@ -1,0 +1,21 @@
+{
+  "name": "TOMO · 番茄的3D世界",
+  "short_name": "TOMO",
+  "description": "一颗有情绪的番茄，住在你的浏览器里。番茄钟、玄学运势、心情树洞、插画馆。",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff8ef",
+  "theme_color": "#b04a3c",
+  "icons": [
+    { "src": "brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "番茄钟", "url": "/?panel=pomodoro", "icons": [{ "src": "brand/icon-192.png", "sizes": "192x192" }] },
+    { "name": "玄学运势", "url": "/?panel=fortune", "icons": [{ "src": "brand/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
