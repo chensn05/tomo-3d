@@ -724,3 +724,41 @@ body {
   /* 面板不压 dock */
   .feature-panel { bottom: 52px !important; max-height: calc(100dvh - 78px) !important; }
 }
+
+/* ═══════════════════════════════════════════
+   底部控件自动堆叠（基于实测 dock 高度 --dock-h）
+   顺序（自下而上）：dock → 情绪按钮 → 提示/显示故事 → 故事卡
+   彻底解决横竖屏下的重叠问题
+   ═══════════════════════════════════════════ */
+:root { --dock-h: 56px; --chip-h: 34px; }
+
+.emotion-picker {
+  bottom: calc(var(--dock-h) + 8px) !important;
+}
+.scroll-hint,
+.show-story-btn {
+  bottom: calc(var(--dock-h) + var(--chip-h) + 16px) !important;
+}
+.story-overlay {
+  padding-bottom: calc(var(--dock-h) + var(--chip-h) + 48px) !important;
+}
+.feature-panel {
+  bottom: calc(var(--dock-h) + 6px) !important;
+  max-height: calc(100dvh - var(--dock-h) - 26px) !important;
+}
+
+/* 横屏：chip 更矮，堆叠更紧凑 */
+@media (orientation: landscape) and (max-height: 620px) {
+  :root { --chip-h: 30px; }
+  .nav-controls {
+    top: 50% !important; bottom: auto !important;
+    transform: translateY(-50%) !important;
+    flex-direction: column !important;
+  }
+  .story-overlay .story-text { max-height: 24vh !important; }
+}
+
+/* 竖屏 chip 尺寸同步 */
+@media (max-width: 768px) and (orientation: portrait) {
+  :root { --chip-h: 32px; }
+}

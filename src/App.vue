@@ -463,6 +463,22 @@ const personalityPanelRef = ref<InstanceType<typeof PersonalityPanel>>()
 let tomoScene: TomoScene | null = null
 
 // 加载文案轮播
+// ── 底部控件自动避让：实测 dock 高度写入 CSS 变量 --dock-h ──
+function syncDockHeight() {
+  const dock = document.querySelector('.feature-dock') as HTMLElement | null
+  const h = dock ? Math.ceil(dock.getBoundingClientRect().height) : 56
+  document.documentElement.style.setProperty('--dock-h', h + 'px')
+}
+onMounted(() => {
+  syncDockHeight()
+  const dock = document.querySelector('.feature-dock')
+  if (dock && 'ResizeObserver' in window) {
+    new ResizeObserver(syncDockHeight).observe(dock)
+  }
+  window.addEventListener('resize', syncDockHeight)
+  window.addEventListener('orientationchange', () => setTimeout(syncDockHeight, 260))
+})
+
 const loadingText = ref('TOMO 正在醒来...')
 const loadingPhrases = ['TOMO 正在醒来...', '正在摆桌子...', '正在给小苗浇水...', '正在数雨滴...']
 let loadingIdx = 0
