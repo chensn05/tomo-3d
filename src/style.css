@@ -483,3 +483,69 @@ body,body *{font-family:'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-
   .emotion-chip { width: 27px; height: 27px; font-size: 13px; }
   .story-text .body { font-size: 11px !important; }
 }
+
+/* ═══ 全屏适配：动态视口高度 + 安全区 + 状态栏融合 ═══ */
+
+/* 优先使用 dvh（随地址栏收起/展开动态变化），旧浏览器回退 100vh */
+html, body { height: 100dvh; }
+@supports not (height: 100dvh) {
+  html, body { height: 100vh; }
+}
+#app { height: 100dvh; }
+@supports not (height: 100dvh) {
+  #app { height: 100vh; }
+}
+
+/* 全屏面板（番茄钟）也用 dvh 兜底 */
+.pomo-fullscreen { height: 100dvh; }
+@supports not (height: 100dvh) {
+  .pomo-fullscreen { height: 100vh; }
+}
+
+/* iOS 刘海屏/灵动岛安全区 */
+body {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* PWA standalone 模式下：背景色延伸到状态栏，视觉全屏 */
+@media all and (display-mode: standalone) {
+  html, body { background: var(--dream-cream, #fff8ef); }
+  .brand-logo { top: calc(env(safe-area-inset-top, 0px) + 10px); }
+  .emotion-badge { top: calc(env(safe-area-inset-top, 0px) + 12px); }
+  .feature-dock { padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); }
+  .feature-panel { max-height: calc(100dvh - 120px); }
+  .pomo-fullscreen { height: 100dvh; padding-top: env(safe-area-inset-top, 0px); }
+}
+
+/* 非独立模式（普通浏览器）：加载后自动隐藏地址栏的视觉引导 */
+@media (max-width: 768px) {
+  /* 提示用户可以添加到主屏幕获得全屏 */
+  .add-to-home-hint {
+    position: fixed; bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+    left: 50%; transform: translateX(-50%);
+    background: rgba(255,249,239,.92);
+    border: 1px solid rgba(181,139,169,.3);
+    border-radius: 100px; padding: 8px 16px;
+    font-size: 11px; color: #6f5d6d;
+    z-index: 90; box-shadow: 0 6px 18px rgba(94,70,99,.12);
+    display: none;
+  }
+  /* 只在非 standalone 且未关闭时显示 */
+  @media all and (display-mode: browser) {
+    .add-to-home-hint.can-show { display: block; }
+  }
+}
+
+/* 添加到主屏幕提示条 */
+.add-to-home-hint {
+  display: flex; align-items: center; gap: 8px;
+  white-space: nowrap;
+}
+.add-to-home-hint .hint-close {
+  border: 0; background: rgba(94,70,99,.12);
+  border-radius: 50%; width: 20px; height: 20px;
+  color: #6f5d6d; font-size: 14px; cursor: pointer; flex-shrink: 0;
+}
