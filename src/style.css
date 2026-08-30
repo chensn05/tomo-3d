@@ -370,3 +370,116 @@ body,body *{font-family:'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-
   .emotion-chip { width: 34px; height: 34px; font-size: 15px; }
   .mixer-mood-grid { grid-template-columns: repeat(3, 1fr) !important; }
 }
+
+/* ═══ 手机端二次收紧：整体缩一倍，全面减密 ═══ */
+@media (max-width: 768px) {
+
+  /* dock：两行改紧凑，图标+文字整体缩小 */
+  .feature-dock { padding: 4px 4px calc(4px + env(safe-area-inset-bottom, 0px)); }
+  .dock-btn { padding: 2px 0; border-radius: 8px; }
+  .dock-icon { font-size: 17px; margin-bottom: 0; }
+  .dock-label { font-size: 8px; }
+
+  /* 情绪滑动条：再小一号 */
+  .emotion-picker { bottom: 54px; gap: 6px; padding: 2px 10px; }
+  .emotion-chip { width: 30px; height: 30px; font-size: 14px; }
+
+  /* 故事卡：更薄 */
+  .story-overlay { padding: 0 10px 186px !important; }
+  .story-overlay .story-text {
+    max-height: 17vh !important;
+    padding: 10px 12px 9px !important;
+    border-radius: 14px 10px 16px 10px !important;
+    inset -0 -0 0 -0;
+    box-shadow: 0 8px 30px rgba(94,70,99,.12), inset 0 0 0 3px rgba(255,255,255,.3) !important;
+  }
+  .story-text .body { font-size: 11.5px !important; line-height: 1.55 !important; }
+  .story-text .chapter { font-size: 9px !important; margin-bottom: 4px; }
+  .story-stamp { display: none; }        /* 手机隐藏邮票，减密度 */
+  .story-flower-mark { display: none; }  /* 手机隐藏花朵标 */
+
+  /* 箭头+提示 */
+  .nav-controls { bottom: 128px; right: 6px; }
+  .nav-btn { width: 28px; height: 28px; font-size: 12px; }
+  .scroll-hint { bottom: 158px !important; font-size: 9px; }
+  .show-story-btn { bottom: 158px !important; font-size: 10px; padding: 4px 12px; }
+
+  /* 顶部品牌区缩小 */
+  .brand-title-art { width: 44px; }
+  .brand-logo .tagline { font-size: 7px; letter-spacing: 0.5px; }
+  .emotion-badge { font-size: 10px; padding: 4px 10px; }
+
+  /* 功能面板：高度收紧、内边距减半 */
+  .feature-panel { max-height: 72vh; }
+  .panel-header { padding: 8px 10px; }
+  .panel-title { font-size: 12px; }
+  .panel-close { width: 26px; height: 26px; font-size: 11px; }
+  .panel-body { padding: 8px 10px 18px; }
+  .feature-panel .panel-body { font-size: 12px; }
+
+  /* 各功能格子再收紧 */
+  .accessory-grid { gap: 4px; }
+  .accessory-item { padding: 6px 2px; border-radius: 8px; }
+  .acc-emoji { font-size: 17px; }
+  .acc-name { font-size: 8px; }
+  .color-grid { gap: 5px; }
+  .color-swatch { width: 26px; height: 26px; }
+  .scene-grid { gap: 6px; }
+  .scene-preview { border-radius: 8px; }
+  .scene-name { font-size: 10px; }
+  .codex-grid { gap: 4px; }
+  .codex-card { padding: 8px 4px; border-radius: 10px; }
+  .codex-emoji { font-size: 21px; }
+  .codex-label { font-size: 10px; }
+  .codex-desc { font-size: 8px; }
+  .merch-art-grid { gap: 6px; }
+  .art-card { padding: 5px; border-radius: 12px; }
+  .art-name { font-size: 10px; }
+  .art-style { font-size: 8px; }
+
+  /* 运势/树洞/鸡尾酒/番茄园共同元素 */
+  .section-label { font-size: 10px !important; margin-bottom: 4px !important; }
+  .mixer-mood-grid { gap: 4px !important; }
+  .mood-chip { padding: 6px 3px; border-radius: 12px; }
+  .mood-emoji { font-size: 16px; }
+  .mood-name { font-size: 8px; }
+  .spread-cards { height: 110px !important; }
+  .spread-card canvas { width: 42px !important; height: 63px !important; }
+  .treehole-textarea { min-height: 72px; font-size: 12px; padding: 10px; }
+  .garden-stat-num { font-size: 15px; }
+  .garden-stat-label { font-size: 8px; }
+
+  /* 番茄钟全屏再收 */
+  .pomo-ring-wrapper { width: 170px !important; height: 170px !important; }
+  .pomo-time { font-size: 34px !important; }
+  .pomo-tomo-emoji { font-size: 26px !important; }
+  .pomo-tomo-msg { font-size: 11px; }
+  .pomo-btn { padding: 9px 16px !important; font-size: 12px !important; }
+  .pomo-stat-num { font-size: 15px !important; }
+  .pomo-stat-label { font-size: 8px !important; }
+  .sound-icon { font-size: 17px; }
+  .sound-name { font-size: 8px !important; }
+  .sound-tab { min-width: 42px !important; padding: 4px 5px !important; }
+
+  /* 语录/口袋/引导缩小 */
+  .tomo-quote-card { top: 11%; font-size: 12px; padding: 12px 22px 12px 14px; width: min(300px, 86vw); }
+  .quote-close { font-size: 17px; }
+  .quote-save { font-size: 9px; padding: 4px 12px; }
+  .pocket-fab { width: 34px; height: 34px; font-size: 15px; top: 48px; right: 10px; }
+  .pocket-count { font-size: 8px; min-width: 13px; height: 13px; }
+  .pocket-item { font-size: 11.5px; padding: 9px 28px 9px 10px; }
+  .onboarding-card { padding: 18px 14px 14px; }
+  .onboarding-icon { font-size: 30px; }
+  .onboarding-title { font-size: 14px; }
+  .onboarding-body { font-size: 11.5px; }
+  .onboarding-actions { gap: 6px; }
+  .onboarding-skip, .onboarding-next { padding: 8px 12px; font-size: 11px; }
+}
+
+/* 超窄屏 */
+@media (max-width: 380px) {
+  .dock-icon { font-size: 15px; }
+  .dock-label { font-size: 7px; }
+  .emotion-chip { width: 27px; height: 27px; font-size: 13px; }
+  .story-text .body { font-size: 11px !important; }
+}
