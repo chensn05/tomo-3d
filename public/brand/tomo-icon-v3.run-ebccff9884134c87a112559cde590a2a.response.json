@@ -1,0 +1,48 @@
+{
+  "conversation_id": 3381452,
+  "message_id": 17452231,
+  "contents": [
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": null,
+          "inlineData": {
+            "mimeType": "image/jpeg",
+            "data": null,
+            "fileUuid": "a5eb60kc",
+            "thumbFileId": "j5smcsci"
+          },
+          "thought": null
+        }
+      ]
+    }
+  ],
+  "usage_metadata": null,
+  "model_info": {
+    "model": "gpt-image-2",
+    "created": 1788071175,
+    "image_count": 1,
+    "usage": {
+      "input_tokens": 454,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 454
+      },
+      "output_tokens": 1756,
+      "output_tokens_details": {
+        "image_tokens": 1756,
+        "text_tokens": 0
+      },
+      "total_tokens": 2210
+    }
+  },
+  "output_image_list": [
+    {
+      "id": "a5eb60kc",
+      "name": "a5eb60kc.jpeg",
+      "size": 402918,
+      "thumbFileId": "j5smcsci"
+    }
+  ]
+}

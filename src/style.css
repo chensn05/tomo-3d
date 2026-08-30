@@ -228,3 +228,145 @@ body,body *{font-family:'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-
 
 /* 番茄园配额提示 */
 .garden-panel .garden-tip{color:#8b788d!important}
+
+/* ═══════════════════════════════════════════
+   手机端深度适配：解决拥挤、重叠、误触
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── 顶部：品牌+情绪标签错开，避免和 3D 挤压 ── */
+  .brand-logo { left: 14px; top: 10px; }
+  .brand-title-art { width: 56px; }
+  .brand-logo .tagline { font-size: 8px; }
+  .emotion-badge { top: 12px; font-size: 11px; padding: 5px 12px; }
+
+  /* ── 3D 场景：给 TOMO 更多呼吸空间（周边物件不越界遮挡）── */
+  .canvas-container canvas { touch-action: none; }
+
+  /* ── 故事卡：缩小并上移，不与情绪按钮重叠 ── */
+  .story-overlay { padding: 0 12px 208px !important; }
+  .story-overlay .story-text {
+    max-width: 96vw !important;
+    max-height: 22vh !important;
+    padding: 14px 16px 12px !important;
+    border-radius: 18px 14px 20px 12px !important;
+  }
+  .story-text .body { font-size: 12.5px !important; line-height: 1.65 !important; }
+  .story-text .chapter { font-size: 10px !important; padding: 0 34px; }
+  .story-stamp { right: 10px; top: 8px; padding: 3px 5px; font-size: 8px; }
+  .story-flower-mark { left: 10px; top: 8px; font-size: 18px; }
+
+  /* ── 翻页箭头：移到故事卡两侧内嵌，不与情绪按钮同行 ── */
+  .nav-controls { bottom: 152px; right: 8px; }
+  .nav-btn { width: 34px; height: 34px; font-size: 15px; }
+
+  /* ── 提示文字 ── */
+  .scroll-hint { bottom: 190px !important; font-size: 10px; white-space: nowrap; }
+  .show-story-btn { bottom: 190px !important; font-size: 11px; padding: 6px 14px; }
+
+  /* ── 情绪按钮：一行横向滚动，不换行叠两层 ── */
+  .emotion-picker {
+    bottom: 64px; gap: 8px;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    scrollbar-width: none;
+    max-width: 100vw;
+    padding: 4px 12px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+  .emotion-picker::-webkit-scrollbar { display: none; }
+  .emotion-chip {
+    width: 38px; height: 38px;
+    font-size: 17px;
+    flex-shrink: 0;
+    background: rgba(255,250,245,.75);
+  }
+
+  /* ── 底部 dock：两行网格（6+5），消除横向滚动和误触 ── */
+  .feature-dock {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .dock-btn { padding: 4px 0; min-width: 0; border-radius: 10px; }
+  .dock-icon { font-size: 21px; margin-bottom: 1px; }
+  .dock-label { font-size: 9px; }
+  .dock-divider { display: none; }
+
+  /* ── 功能面板：全宽底部抽屉，更大更不挤 ── */
+  .feature-panel {
+    bottom: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100vw !important;
+    max-height: 78vh;
+    border-radius: 22px 22px 0 0;
+    animation: panelSlideUp .3s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes panelSlideUp {
+    from { opacity: 0; transform: translateY(60px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .panel-header { padding: 12px 14px; }
+  .panel-title { font-size: 14px; }
+  .panel-close { width: 32px; height: 32px; }
+  .panel-body { padding: 12px 14px 24px; }
+
+  /* 面板内格子统一缩间距 */
+  .accessory-grid { gap: 6px; }
+  .scene-grid { gap: 8px; }
+  .codex-grid { gap: 6px; }
+  .merch-art-grid { gap: 8px; }
+
+  /* 运势牌展扇：缩小卡牌避免溢出 */
+  .spread-cards { height: 130px !important; }
+  .spread-card canvas { width: 52px !important; height: 78px !important; }
+
+  /* 鸡尾酒心情格子：3列避免挤 */
+  .mixer-mood-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; }
+
+  /* 首页：标题和按钮留更多呼吸空间 */
+  .home-title-art { width: min(220px, 60vw) !important; }
+  .home-subtitle { font-size: 13px; letter-spacing: 3px; margin-top: 6px; }
+  .home-enter-btn { margin-top: 28px; padding: 12px 32px; font-size: 14px; }
+
+  /* 装饰元素降透明度，减少视觉噪音 */
+  .dream-flower { opacity: .32 !important; transform: scale(.6); }
+  .dream-ribbon { font-size: 44px; right: 2%; top: 11%; }
+  .dream-cloud { opacity: .5; }
+  .dream-raindrop { width: 36px; height: 40px; }
+
+  /* 语录卡 / 口袋 */
+  .tomo-quote-card { top: 14%; font-size: 13.5px; padding: 16px 26px 15px 18px; }
+  .pocket-fab { right: 12px; top: 56px; width: 40px; height: 40px; }
+  .pocket-card { padding: 18px 14px; }
+
+  /* 番茄钟全屏：竖向排布优化 */
+  .pomo-ring-wrapper { width: 200px !important; height: 200px !important; }
+  .pomo-time { font-size: 40px !important; }
+  .pomo-tomo-emoji { font-size: 32px !important; }
+  .pomo-controls { flex-wrap: wrap; justify-content: center; }
+  .pomo-btn { padding: 11px 20px !important; font-size: 13px !important; }
+  .pomo-settings { flex-direction: column; gap: 8px !important; }
+  .pomo-stats-bar { gap: 10px !important; padding: 8px 12px !important; }
+  .sound-tab { min-width: 48px !important; padding: 6px 8px !important; }
+
+  /* 新手引导 */
+  .onboarding-card { padding: 22px 18px 16px; }
+  .onboarding-icon { font-size: 36px; }
+  .onboarding-title { font-size: 15px; }
+  .onboarding-body { font-size: 12px; min-height: 44px; }
+}
+
+/* 超窄屏（iPhone SE 等）*/
+@media (max-width: 380px) {
+  .feature-dock { grid-template-columns: repeat(6, 1fr); }
+  .dock-label { font-size: 8px; }
+  .emotion-chip { width: 34px; height: 34px; font-size: 15px; }
+  .mixer-mood-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
