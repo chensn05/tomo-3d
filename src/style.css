@@ -657,36 +657,6 @@ body {
   }
 }
 
-/* ── 竖屏引导：请横屏使用（仅手机竖屏显示） ── */
-.rotate-tip {
-  position: fixed;
-  inset: 0;
-  z-index: 400;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  background: linear-gradient(170deg, #fff9f1 0%, #f7ece0 100%);
-  color: #5b4436;
-  text-align: center;
-  padding: 32px 28px;
-}
-@media (max-width: 768px) and (orientation: portrait) {
-  .rotate-tip { display: flex; }
-}
-.rotate-icon {
-  font-size: 58px;
-  animation: rotateHint 2.4s ease-in-out infinite;
-}
-@keyframes rotateHint {
-  0%, 100% { transform: rotate(0deg); }
-  40% { transform: rotate(-88deg); }
-  70% { transform: rotate(-88deg); }
-}
-.rotate-title { font-size: 17px; font-weight: 700; letter-spacing: 1px; }
-.rotate-sub { font-size: 12.5px; line-height: 1.9; color: #7d675a; max-width: 260px; }
-.rotate-brand { width: 110px; opacity: .9; margin-bottom: 4px; }
 
 /* 首页文案上移，避免压住 TOMO 叶子，给下方留白 */
 @media (max-width: 768px) {
@@ -696,4 +666,14 @@ body {
   }
   .home-subtitle { margin-top: 8px !important; }
   .home-enter-btn { margin-top: 34vh !important; }
+}
+
+/* ═══ 手机端底部三层堆叠修正（dock 两行后重新分配）═══ */
+@media (max-width: 768px) {
+  /* dock 实测高 96px，以此为基准往上排 */
+  .emotion-picker { bottom: 104px !important; }
+  .nav-controls   { bottom: 148px !important; }
+  .scroll-hint    { bottom: 150px !important; }
+  .show-story-btn { bottom: 150px !important; }
+  .story-overlay  { padding-bottom: 192px !important; }
 }
