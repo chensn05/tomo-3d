@@ -68,12 +68,6 @@
       </div>
     </div>
 
-    <!-- 添加到主屏幕提示 -->
-    <div class="add-to-home-hint" :class="{ 'can-show': showAddHomeHint }" v-if="!addHomeDismissed">
-      📲 把 TOMO 装进手机 → Safari「分享」→「添加到主屏幕」，即可全屏
-      <button class="hint-close" @click="dismissAddHome">×</button>
-    </div>
-
     <!-- 加载界面 -->
     <div class="loading-screen" :class="{ hidden: loaded }">
       <div class="loading-tomato"></div>
@@ -469,19 +463,6 @@ const personalityPanelRef = ref<InstanceType<typeof PersonalityPanel>>()
 let tomoScene: TomoScene | null = null
 
 // 加载文案轮播
-// 添加到主屏幕提示（仅普通浏览器模式显示一次）
-const showAddHomeHint = ref(false)
-const addHomeDismissed = ref(localStorage.getItem('tomo-addhome-dismissed') === '1')
-function dismissAddHome() {
-  addHomeDismissed.value = true
-  localStorage.setItem('tomo-addhome-dismissed', '1')
-}
-const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone === true
-if (!isStandalone && !addHomeDismissed.value) {
-  setTimeout(() => { showAddHomeHint.value = true }, 15000)
-  setTimeout(() => { showAddHomeHint.value = false }, 40000)
-}
-
 const loadingText = ref('TOMO 正在醒来...')
 const loadingPhrases = ['TOMO 正在醒来...', '正在摆桌子...', '正在给小苗浇水...', '正在数雨滴...']
 let loadingIdx = 0
