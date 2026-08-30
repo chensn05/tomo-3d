@@ -6,8 +6,8 @@
   "scope": "/tomo-3d/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#9a6c4a",
-  "theme_color": "#9a6c4a",
+  "background_color": "#faf3e6",
+  "theme_color": "#faf3e6",
   "icons": [
     {
       "src": "brand/icon-192.png",

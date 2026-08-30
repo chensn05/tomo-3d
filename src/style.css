@@ -677,3 +677,50 @@ body {
   .show-story-btn { bottom: 150px !important; }
   .story-overlay  { padding-bottom: 192px !important; }
 }
+
+/* ═══ 横屏页面修复：底部按钮不重叠 + 3D 铺满 ═══ */
+@media (orientation: landscape) and (max-height: 620px) {
+
+  /* 安全区不再加在 body（否则 3D 两侧留白条），改到各 UI 层 */
+  body { padding: 0 !important; }
+  #app, .canvas-container { width: 100vw !important; }
+
+  /* dock 更矮：整条约 46px，为上层元素腾空间 */
+  .feature-dock {
+    padding: 3px calc(8px + env(safe-area-inset-right,0px)) calc(3px + env(safe-area-inset-bottom,0px)) calc(8px + env(safe-area-inset-left,0px)) !important;
+    gap: 0 !important;
+  }
+  .dock-btn { padding: 2px 6px !important; min-width: 36px !important; }
+  .dock-icon { font-size: 15px !important; margin-bottom: 0 !important; }
+  .dock-label { font-size: 8px !important; }
+
+  /* 情绪按钮：抬到 dock 之上，不再被压住 */
+  .emotion-picker { bottom: 54px !important; gap: 6px !important; }
+  .emotion-chip { width: 28px !important; height: 28px !important; font-size: 13px !important; }
+
+  /* 显示故事 / 提示：再往上一层 */
+  .show-story-btn, .scroll-hint { bottom: 92px !important; font-size: 10.5px !important; }
+  .show-story-btn { padding: 6px 16px !important; }
+
+  /* 翻页箭头：贴右侧中部，脱离底部堆叠区 */
+  .nav-controls {
+    right: calc(10px + env(safe-area-inset-right,0px)) !important;
+    bottom: auto !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .nav-btn { width: 30px !important; height: 30px !important; font-size: 13px !important; }
+
+  /* 故事卡上移，避开三层控件 */
+  .story-overlay { padding: 0 20px 128px !important; }
+  .story-overlay .story-text { max-height: 26vh !important; }
+
+  /* 顶部安全区 */
+  .brand-logo { left: calc(14px + env(safe-area-inset-left,0px)) !important; }
+  .pocket-fab { right: calc(10px + env(safe-area-inset-right,0px)) !important; }
+
+  /* 面板不压 dock */
+  .feature-panel { bottom: 52px !important; max-height: calc(100dvh - 78px) !important; }
+}
