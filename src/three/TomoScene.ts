@@ -145,6 +145,8 @@ export class TomoScene {
 
   private targetZoom = 5.5
   private currentZoom = 5.5
+  private baseZoom = 5.5
+  private lookAtY = 0.3
 
   // 周边可拖拽展示物 - 卡片+3D模型
   private draggables: DraggableItem[] = []
@@ -164,8 +166,7 @@ export class TomoScene {
       this.container.clientWidth / this.container.clientHeight,
       0.1, 100
     )
-    this.camera.position.set(0, 2.2, 5.5)
-    this.camera.lookAt(0, 0.3, 0)
+    this.applyResponsiveCamera()
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true })
     this.renderer.setSize(this.container.clientWidth, this.container.clientHeight)
@@ -210,6 +211,8 @@ export class TomoScene {
     this.setupEvents()
     this.animate()
     window.addEventListener('resize', this.onResize)
+    window.addEventListener('orientationchange', this.onResize)
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', this.onResize)
   }
 
   private setupLights() {
@@ -776,7 +779,12 @@ export class TomoScene {
   toggleCustomAccessory(accessory: string): boolean { return this.tomo.toggleCustomAccessory(accessory) }
   setBodyColor(color: number) { this.tomo.setBodyColor(color) }
   resetRotation() { this.targetRotationY = 0; this.targetRotationX = 0 }
-  setZoom(zoom: number) { this.targetZoom = Math.max(3, Math.min(12, zoom)) }
+  setZoom(zoom: number) {
+    // zoom 参数以桌面基准 5.5 为参照，换算成当前屏幕基准
+    const ratio = zoom / 5.5
+    const target = this.baseZoom * ratio
+    this.targetZoom = Math.max(this.baseZoom * 0.55, Math.min(this.baseZoom * 2.2, target))
+  }
 
   screenshot(): string {
     this.renderer.render(this.scene, this.camera)
@@ -829,6 +837,7 @@ export class TomoScene {
     // 缩放平滑
     this.currentZoom += (this.targetZoom - this.currentZoom) * 0.1
     this.camera.position.z = this.currentZoom
+    this.camera.lookAt(0, this.lookAtY, 0)
 
     this.tomo.update(delta, elapsed)
     this.particles.update(delta, elapsed)
@@ -848,18 +857,65 @@ export class TomoScene {
     this.renderer.render(this.scene, this.camera)
   }
 
+  /**
+   * 自适应相机：竖屏手机拉远取景，保证场景完整 + 留白呼吸感
+   */
+  private applyResponsiveCamera() {
+    if (!this.container) return
+    const w = this.container.clientWidth || window.innerWidth
+    const h = this.container.clientHeight || window.innerHeight
+    const aspect = w / h
+    const BASE_DIST = 5.5
+    const BASE_Y = 2.2
+
+    let dist = BASE_DIST
+    let y = BASE_Y
+    let lookY = 0.3
+
+    const isPortrait = h > w
+    if (isPortrait && w <= 900) {
+      // 竖屏：按宽高比温和拉远（上限约 2.2 倍），TOMO 比原手机视图小约一半
+      const fit = Math.min(Math.pow(1.34 / Math.max(aspect, 0.35), 0.42), 1.55)
+      dist = BASE_DIST * fit * 1.26
+      y = BASE_Y * (1 + (fit * 1.26 - 1) * 0.10)
+      lookY = 0.62   // 视线略低于番茄中心，主体上移到画面 40% 处（对齐桌面取景）
+    } else if (aspect < 1.34) {
+      // 桌面窄窗口：轻微拉远避免裁切
+      const fit = Math.pow(1.34 / aspect, 0.5)
+      dist = BASE_DIST * fit
+      y = BASE_Y * (1 + (fit - 1) * 0.3)
+    }
+
+    this.baseZoom = dist
+    this.targetZoom = dist
+    this.currentZoom = dist
+    this.camera.position.set(0, y, dist)
+    this.lookAtY = lookY
+    this.camera.lookAt(0, lookY, 0)
+    this.camera.updateProjectionMatrix()
+
+    // 雾随相机距离外推，避免拉远后场景被雾吞掉
+    if (this.scene && this.scene.fog) {
+      const f = this.scene.fog as THREE.Fog
+      f.near = dist + 6
+      f.far = dist + 26
+    }
+  }
+
   private onResize = () => {
     if (!this.container) return
     const w = this.container.clientWidth
     const h = this.container.clientHeight
     this.camera.aspect = w / h
-    this.camera.updateProjectionMatrix()
+    this.applyResponsiveCamera()
     this.renderer.setSize(w, h)
   }
 
   dispose() {
     cancelAnimationFrame(this.animationId)
     window.removeEventListener('resize', this.onResize)
+    window.removeEventListener('orientationchange', this.onResize)
+    if (window.visualViewport) window.visualViewport.removeEventListener('resize', this.onResize)
     this.tomo?.dispose()
     this.particles?.dispose()
     this.foodBuddies.forEach(b => b.dispose())

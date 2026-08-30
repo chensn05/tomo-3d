@@ -68,6 +68,14 @@
       </div>
     </div>
 
+    <!-- 竖屏引导：横屏获得完整体验 -->
+    <div class="rotate-tip">
+      <img class="rotate-brand" src="/brand/tomo-title.svg" alt="TOMO" />
+      <div class="rotate-icon">📱</div>
+      <div class="rotate-title">请横屏使用</div>
+      <div class="rotate-sub">TOMO 的 3D 世界为宽屏而生<br />把手机横过来，就是完整的桌面级体验</div>
+    </div>
+
     <!-- 加载界面 -->
     <div class="loading-screen" :class="{ hidden: loaded }">
       <div class="loading-tomato"></div>
