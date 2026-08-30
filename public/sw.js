@@ -1,13 +1,13 @@
 // TOMO PWA Service Worker
-const CACHE = 'tomo-v1'
+const CACHE = 'tomo-v1.1'
 const CORE = [
   '/',
-  '/index.html',
-  '/manifest.json',
-  '/brand/favicon-32.png',
-  '/brand/icon-192.png',
-  '/brand/icon-512.png',
-  '/brand/apple-touch-icon.png',
+  '/tomo-3d/index.html',
+  '/tomo-3d/manifest.json',
+  '/tomo-3d/brand/favicon-32.png',
+  '/tomo-3d/brand/icon-192.png',
+  '/tomo-3d/brand/icon-512.png',
+  '/tomo-3d/brand/apple-touch-icon.png',
 ]
 
 self.addEventListener('install', (e) => {
@@ -37,6 +37,6 @@ self.addEventListener('fetch', (e) => {
         caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {})
         return res
       })
-      .catch(() => caches.match(e.request).then((r) => r || caches.match('/index.html')))
+      .catch(() => caches.match(e.request).then((r) => r || caches.match('/tomo-3d/index.html')))
   )
 })
