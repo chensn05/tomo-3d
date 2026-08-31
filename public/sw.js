@@ -1,5 +1,5 @@
 // TOMO PWA Service Worker
-const CACHE = 'tomo-v1.1'
+const CACHE = 'tomo-v2'
 const CORE = [
   '/',
   '/tomo-3d/index.html',
