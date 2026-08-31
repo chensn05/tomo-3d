@@ -1,8 +1,8 @@
 <template>
   <div class="feature-panel garden-panel">
     <div class="panel-header">
-      <span class="panel-title">🌱 TOMO 番茄园</span>
-      <button class="panel-close" @click="$emit('close')">✕</button>
+      <span class="panel-title"><TomoIcon name="sprout" /> TOMO 番茄园</span>
+      <button class="panel-close" @click="$emit('close')"><TomoIcon name="close" /></button>
     </div>
     <div class="panel-body">
 
@@ -22,8 +22,7 @@
         <div class="garden-progress-label" v-if="currentStageIdx < stages.length - 1">
           距离「{{ stages[currentStageIdx + 1].name }}」还需 {{ waterNeeded }} 次浇水
         </div>
-        <div class="garden-progress-label" v-else>
-          🎉 你的番茄已经完美成熟啦！
+        <div class="garden-progress-label" v-else><TomoIcon name="party" /> 你的番茄已经完美成熟啦！
         </div>
       </div>
 
@@ -46,21 +45,20 @@
       <!-- 操作按钮 -->
       <div class="garden-actions">
         <button class="garden-water-btn" @click="water" :disabled="!canWater">
-          <span class="water-icon">💧</span>
+          <span class="water-icon"><TomoIcon name="water" /></span>
           <span v-if="canWater">浇水（今日 {{ waterQuota - dailyWaterCount }} 次剩余）</span>
-          <span v-else>今日已浇满 · 明天再来 🌙</span>
+          <span v-else>今日已浇满 · 明天再来 <TomoIcon name="moon" /></span>
         </button>
         <div class="garden-tip" v-if="pomodoroCount > 0">
           ✦ 今日完成 {{ pomodoroCount }} 次专注，浇水配额 +{{ pomodoroCount * 2 }}
         </div>
-        <div class="garden-tip" v-else>
-          💡 每完成一次番茄钟专注，可额外浇 2 次水
+        <div class="garden-tip" v-else><TomoIcon name="idea" /> 每完成一次番茄钟专注，可额外浇 2 次水
         </div>
       </div>
 
       <!-- 成就列表 -->
       <div class="garden-milestones">
-        <div class="milestones-title">🏆 阶段成就</div>
+        <div class="milestones-title"><TomoIcon name="trophy" /> 阶段成就</div>
         <div class="milestones-list">
           <div
             v-for="(s, i) in stages"
@@ -68,16 +66,15 @@
             class="milestone-item"
             :class="{ unlocked: i <= currentStageIdx, current: i === currentStageIdx }"
           >
-            <span class="milestone-emoji">{{ s.emoji }}</span>
+            <span class="milestone-emoji"><TomoIcon :name="s.emoji" /></span>
             <span class="milestone-name">{{ s.name }}</span>
-            <span class="milestone-check" v-if="i <= currentStageIdx">✓</span>
+            <span class="milestone-check" v-if="i <= currentStageIdx"><TomoIcon name="check" /></span>
           </div>
         </div>
       </div>
 
       <!-- 重置按钮 -->
-      <button class="garden-reset" @click="showResetConfirm = true" v-if="currentStageIdx >= stages.length - 1">
-        🌱 重新种一颗
+      <button class="garden-reset" @click="showResetConfirm = true" v-if="currentStageIdx >= stages.length - 1"><TomoIcon name="sprout" /> 重新种一颗
       </button>
 
       <!-- 重置确认 -->
@@ -100,10 +97,10 @@ import { ref, computed, onMounted, watch } from 'vue'
 const emit = defineEmits<{ close: []; setEmotion: [id: string] }>()
 
 const stages = [
-  { id: 'seed', name: '种子期', emoji: '🌰', desc: '种子静静躺在土里，等待发芽。', waterToNext: 3, art: 'art/grow_seed.jpg', emotion: 'idle' },
-  { id: 'sprout', name: '发芽期', emoji: '🌱', desc: '嫩绿的芽刚探出头，充满生命力。', waterToNext: 5, art: 'art/grow_sprout.jpg', emotion: 'shy' },
-  { id: 'young', name: '开花期', emoji: '🌼', desc: '枝头开出小黄花，孕育着果实。', waterToNext: 7, art: 'art/grow_young.jpg', emotion: 'flattered' },
-  { id: 'ripe', name: '成熟期', emoji: '🍅', desc: '红彤彤的番茄挂满枝头，可以采摘啦！', waterToNext: 0, art: 'art/grow_ripe.jpg', emotion: 'cool' },
+  { id: 'seed', name: '种子期', emoji: 'seed', desc: '种子静静躺在土里，等待发芽。', waterToNext: 3, art: 'art/grow_seed.jpg', emotion: 'idle' },
+  { id: 'sprout', name: '发芽期', emoji: 'sprout', desc: '嫩绿的芽刚探出头，充满生命力。', waterToNext: 5, art: 'art/grow_sprout.jpg', emotion: 'shy' },
+  { id: 'young', name: '开花期', emoji: 'flower', desc: '枝头开出小黄花，孕育着果实。', waterToNext: 7, art: 'art/grow_young.jpg', emotion: 'flattered' },
+  { id: 'ripe', name: '成熟期', emoji: 'tomato', desc: '红彤彤的番茄挂满枝头，可以采摘啦！', waterToNext: 0, art: 'art/grow_ripe.jpg', emotion: 'cool' },
 ]
 
 const totalWater = ref(0)

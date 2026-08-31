@@ -1,8 +1,8 @@
 <template>
   <div class="feature-panel meme-panel">
     <div class="panel-header">
-      <span class="panel-title">🎤 TOMO 表情包生成器</span>
-      <button class="panel-close" @click="$emit('close')">✕</button>
+      <span class="panel-title"><TomoIcon name="mic" /> TOMO 表情包生成器</span>
+      <button class="panel-close" @click="$emit('close')"><TomoIcon name="close" /></button>
     </div>
     <div class="panel-body">
       <!-- 预览区 -->
@@ -21,7 +21,7 @@
             :class="{ active: selectedEmotion === emo.id }"
             @click="selectEmotion(emo.id)"
           >
-            {{ emo.emoji }}
+            <TomoIcon :name="emo.emoji" />
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
         <div class="section-label">快速模板</div>
         <div class="meme-templates">
           <div class="meme-template" v-for="tpl in templates" :key="tpl.top" @click="applyTemplate(tpl)">
-            <span class="tpl-emoji">{{ tpl.emoji }}</span>
+            <span class="tpl-emoji"><TomoIcon :name="tpl.emoji" /></span>
             <span class="tpl-text">{{ tpl.top }} / {{ tpl.bottom }}</span>
           </div>
         </div>
@@ -78,14 +78,14 @@ const textStyle = ref<'white' | 'yellow' | 'handwrite'>('white')
 const memeEmotions = emotions
 
 const templates = [
-  { emoji: '😎', top: '我又红了', bottom: '', emotion: 'cool' },
-  { emoji: '😠', top: '别碰我', bottom: '我还没熟透', emotion: 'angry' },
-  { emoji: '😭', top: '砧板警告', bottom: '今日不宜下厨', emotion: 'crying' },
-  { emoji: '🤔', top: '我是谁', bottom: '我在哪', emotion: 'confused' },
-  { emoji: '😳', top: '被夸了', bottom: '其实我也没那么红', emotion: 'flattered' },
-  { emoji: '🍅', top: '今天也是', bottom: '饱满的一天', emotion: 'idle' },
-  { emoji: '🤒', top: 'TOMO 已宕机', bottom: '请稍后再试', emotion: 'sick' },
-  { emoji: '😊', top: '只想躺平', bottom: '不想做食材', emotion: 'shy' },
+  { emoji: 'face-cool', top: '我又红了', bottom: '', emotion: 'cool' },
+  { emoji: 'face-angry', top: '别碰我', bottom: '我还没熟透', emotion: 'angry' },
+  { emoji: 'face-cry', top: '砧板警告', bottom: '今日不宜下厨', emotion: 'crying' },
+  { emoji: 'face-think', top: '我是谁', bottom: '我在哪', emotion: 'confused' },
+  { emoji: 'face-shy', top: '被夸了', bottom: '其实我也没那么红', emotion: 'flattered' },
+  { emoji: 'tomato', top: '今天也是', bottom: '饱满的一天', emotion: 'idle' },
+  { emoji: 'face-sick', top: 'TOMO 已宕机', bottom: '请稍后再试', emotion: 'sick' },
+  { emoji: 'face-happy', top: '只想躺平', bottom: '不想做食材', emotion: 'shy' },
 ]
 
 function selectEmotion(id: string) {

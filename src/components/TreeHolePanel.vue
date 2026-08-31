@@ -1,16 +1,14 @@
 <template>
   <div class="feature-panel treehole-panel">
     <div class="panel-header">
-      <span class="panel-title">🌳 TOMO 情绪树洞</span>
-      <button class="panel-close" @click="$emit('close')">✕</button>
+      <span class="panel-title"><TomoIcon name="tree" /> TOMO 情绪树洞</span>
+      <button class="panel-close" @click="$emit('close')"><TomoIcon name="close" /></button>
     </div>
     <div class="panel-body">
       <!-- 倾诉输入 -->
       <div class="treehole-input-section" v-if="!buried">
         <div class="treehole-tomo-listening">
-          <div class="listening-tomato" :class="{ listening: isListening }">
-            🍅
-          </div>
+          <div class="listening-tomato" :class="{ listening: isListening }"><TomoIcon name="tomato" /></div>
           <div class="listening-text" v-if="!isListening && !userInput">
             TOMO 在这里听你说
           </div>
@@ -44,22 +42,21 @@
               :class="{ active: selectedMood === mood.id }"
               @click="selectMood(mood.id)"
             >
-              {{ mood.emoji }} {{ mood.label }}
+              <TomoIcon :name="mood.emoji" /> {{ mood.label }}
             </div>
           </div>
         </div>
 
-        <button class="treehole-bury-btn" @click="buryMessage" :disabled="!userInput.trim()">
-          🌱 埋进土里，让烦恼开出花
+        <button class="treehole-bury-btn" @click="buryMessage" :disabled="!userInput.trim()"><TomoIcon name="sprout" /> 埋进土里，让烦恼开出花
         </button>
       </div>
 
       <!-- 埋土动画 -->
       <div class="treehole-burying" v-if="buried">
         <div class="bury-animation">
-          <div class="bury-tomato">🍅</div>
+          <div class="bury-tomato"><TomoIcon name="tomato" /></div>
           <div class="bury-soil"></div>
-          <div class="bury-flower" v-if="flowerBloomed">🌸</div>
+          <div class="bury-flower" v-if="flowerBloomed"><TomoIcon name="flower" /></div>
         </div>
         <div class="bury-text">
           {{ buryStage === 0 ? 'TOMO 正在帮你埋...' : '看，开出一朵小花！' }}
@@ -79,7 +76,7 @@
             class="calendar-day"
             :class="{ today: entry.isToday }"
           >
-            <div class="cal-emoji">{{ entry.emoji }}</div>
+            <div class="cal-emoji"><TomoIcon :name="entry.emoji" /></div>
             <div class="cal-date">{{ entry.dateLabel }}</div>
           </div>
         </div>
@@ -113,16 +110,16 @@ const buried = ref(false)
 const buryStage = ref(0)
 const flowerBloomed = ref(false)
 const tomoReply = ref('')
-const reactionEmoji = ref('🍅')
+const reactionEmoji = ref('tomato')
 const calendarEntries = ref<{date: string, dateLabel: string, emoji: string, mood: string, isToday: boolean}[]>([])
 
 const moods = [
-  { id: 'happy', emoji: '😊', label: '开心', tomoEmotion: 'flattered', reply: '听到你开心，TOMO 也跟着红了起来！' },
-  { id: 'sad', emoji: '😢', label: '难过', tomoEmotion: 'sad', reply: 'TOMO 陪你难过，哭出来会好一些。' },
-  { id: 'angry', emoji: '😠', label: '生气', tomoEmotion: 'angry', reply: '太气了！TOMO 也替你气！' },
-  { id: 'tired', emoji: '🤒', label: '累了', tomoEmotion: 'sick', reply: '累了就歇歇，TOMO 帮你顶着。' },
-  { id: 'confused', emoji: '🤔', label: '迷茫', tomoEmotion: 'confused', reply: 'TOMO 也不知道答案，但会陪你找。' },
-  { id: 'calm', emoji: '🍅', label: '平静', tomoEmotion: 'idle', reply: '平静的一天也是好日子。' },
+  { id: 'happy', emoji: 'face-happy', label: '开心', tomoEmotion: 'flattered', reply: '听到你开心，TOMO 也跟着红了起来！' },
+  { id: 'sad', emoji: 'face-sad', label: '难过', tomoEmotion: 'sad', reply: 'TOMO 陪你难过，哭出来会好一些。' },
+  { id: 'angry', emoji: 'face-angry', label: '生气', tomoEmotion: 'angry', reply: '太气了！TOMO 也替你气！' },
+  { id: 'tired', emoji: 'face-sick', label: '累了', tomoEmotion: 'sick', reply: '累了就歇歇，TOMO 帮你顶着。' },
+  { id: 'confused', emoji: 'face-think', label: '迷茫', tomoEmotion: 'confused', reply: 'TOMO 也不知道答案，但会陪你找。' },
+  { id: 'calm', emoji: 'tomato', label: '平静', tomoEmotion: 'idle', reply: '平静的一天也是好日子。' },
 ]
 
 // 关键词 -> 情绪
@@ -158,7 +155,7 @@ function analyzeText() {
     }
   }
   // 默认
-  reactionEmoji.value = '🍅'
+  reactionEmoji.value = 'tomato'
   tomoReply.value = ''
 }
 
@@ -220,7 +217,7 @@ function resetTreeHole() {
   buryStage.value = 0
   flowerBloomed.value = false
   tomoReply.value = ''
-  reactionEmoji.value = '🍅'
+  reactionEmoji.value = 'tomato'
   emit('setEmotion', 'idle')
 }
 

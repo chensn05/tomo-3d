@@ -188,7 +188,7 @@ function drawCardSymbol(ctx: CanvasRenderingContext2D, number: string, cx: numbe
       ctx.fillStyle = '#e17055'
       ctx.font = 'bold 16px Arial'
       ctx.textAlign = 'center'
-      ctx.fillText('⚔', 0, r * 0.2)  // 宝剑
+      ctx.fillText('sword', 0, r * 0.2)  // 宝剑
       ctx.fillText('🜁', -r * 0.3, r * 0.2) // 风
       ctx.fillText('🜃', r * 0.3, r * 0.2) // 水
       // 桌面线
@@ -710,7 +710,7 @@ function drawCardSymbol(ctx: CanvasRenderingContext2D, number: string, cx: numbe
       ctx.fillText('♂', 0, -r * 0.42) // 狮子
       ctx.fillText('♀', 0, r * 0.48) // 牛
       ctx.fillText('☆', -r * 0.45, 0) // 人
-      ctx.fillText('🦅', r * 0.45, 0) // 鹰
+      ctx.fillText('eagle', r * 0.45, 0) // 鹰
       break
 
     default:

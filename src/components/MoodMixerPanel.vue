@@ -1,8 +1,8 @@
 <template>
   <div class="feature-panel mixer-panel">
     <div class="panel-header">
-      <span class="panel-title">🎨 心情鸡尾酒</span>
-      <button class="panel-close" @click="$emit('close')">✕</button>
+      <span class="panel-title"><TomoIcon name="palette" /> 心情鸡尾酒</span>
+      <button class="panel-close" @click="$emit('close')"><TomoIcon name="close" /></button>
     </div>
     <div class="panel-body">
 
@@ -20,7 +20,7 @@
           </div>
           <div class="glass-picked">
             <span v-for="(m, i) in picked" :key="i" class="picked-badge">
-              {{ moodMap[m].emoji }}
+              <TomoIcon :name="moodMap[m].emoji" />
             </span>
             <span v-for="i in 3 - picked.length" :key="'e'+i" class="picked-empty">·</span>
           </div>
@@ -34,13 +34,12 @@
             :class="{ selected: picked.includes(mood.id), disabled: picked.length >= 3 && !picked.includes(mood.id) }"
             @click="toggleMood(mood.id)"
           >
-            <span class="mood-emoji">{{ mood.emoji }}</span>
+            <span class="mood-emoji"><TomoIcon :name="mood.emoji" /></span>
             <span class="mood-name">{{ mood.name }}</span>
           </div>
         </div>
 
-        <button class="mixer-generate-btn" @click="generate" :disabled="picked.length !== 3">
-          🍸 调制我的鸡尾酒
+        <button class="mixer-generate-btn" @click="generate" :disabled="picked.length !== 3"><TomoIcon name="cocktail" /> 调制我的鸡尾酒
         </button>
 
         <!-- Key 提示 -->
@@ -76,7 +75,7 @@
         </div>
         <div class="result-recipe">
           <span v-for="m in picked" :key="m" class="recipe-badge">
-            {{ moodMap[m].emoji }} {{ moodMap[m].name }}
+            <TomoIcon :name="moodMap[m].emoji" /> {{ moodMap[m].name }}
           </span>
         </div>
         <div class="result-actions">
@@ -102,18 +101,18 @@ interface Mood {
 }
 
 const moods: Mood[] = [
-  { id: 'happy', emoji: '😊', name: '开心', color: '#ffd93d', keyword: 'joyful cheerful' },
-  { id: 'calm', emoji: '🌿', name: '平静', color: '#8fd694', keyword: 'peaceful calm zen' },
-  { id: 'excited', emoji: '✨', name: '兴奋', color: '#ff6b9d', keyword: 'excited sparkling energetic' },
-  { id: 'sad', emoji: '💧', name: '难过', color: '#5b9bd5', keyword: 'melancholic wistful blue' },
-  { id: 'angry', emoji: '🔥', name: '生气', color: '#ff4747', keyword: 'fiery angry intense red' },
-  { id: 'tired', emoji: '☁️', name: '疲惫', color: '#a8a8b8', keyword: 'exhausted sleepy gray' },
-  { id: 'confused', emoji: '🌀', name: '迷茫', color: '#9b7ec7', keyword: 'confused dreamy purple' },
-  { id: 'love', emoji: '💕', name: '被爱', color: '#ff9bb3', keyword: 'loving warm cozy pink' },
-  { id: 'lucky', emoji: '🍀', name: '好运', color: '#68d391', keyword: 'lucky lucky sparkle green' },
-  { id: 'lazy', emoji: '🍵', name: '慵懒', color: '#d4a878', keyword: 'lazy afternoon warm brown' },
-  { id: 'brave', emoji: '⚡', name: '勇敢', color: '#ffa502', keyword: 'brave bold heroic' },
-  { id: 'shy', emoji: '🌸', name: '害羞', color: '#ffb3d1', keyword: 'shy blushing soft pink' },
+  { id: 'happy', emoji: 'face-happy', name: '开心', color: '#ffd93d', keyword: 'joyful cheerful' },
+  { id: 'calm', emoji: 'leaf', name: '平静', color: '#8fd694', keyword: 'peaceful calm zen' },
+  { id: 'excited', emoji: 'sparkle', name: '兴奋', color: '#ff6b9d', keyword: 'excited sparkling energetic' },
+  { id: 'sad', emoji: 'water', name: '难过', color: '#5b9bd5', keyword: 'melancholic wistful blue' },
+  { id: 'angry', emoji: 'fire', name: '生气', color: '#ff4747', keyword: 'fiery angry intense red' },
+  { id: 'tired', emoji: 'cloud', name: '疲惫', color: '#a8a8b8', keyword: 'exhausted sleepy gray' },
+  { id: 'confused', emoji: 'spiral', name: '迷茫', color: '#9b7ec7', keyword: 'confused dreamy purple' },
+  { id: 'love', emoji: 'hearts', name: '被爱', color: '#ff9bb3', keyword: 'loving warm cozy pink' },
+  { id: 'lucky', emoji: 'clover', name: '好运', color: '#68d391', keyword: 'lucky lucky sparkle green' },
+  { id: 'lazy', emoji: 'tea', name: '慵懒', color: '#d4a878', keyword: 'lazy afternoon warm brown' },
+  { id: 'brave', emoji: 'bolt', name: '勇敢', color: '#ffa502', keyword: 'brave bold heroic' },
+  { id: 'shy', emoji: 'flower', name: '害羞', color: '#ffb3d1', keyword: 'shy blushing soft pink' },
 ]
 
 const moodMap = moods.reduce((acc, m) => { acc[m.id] = m; return acc }, {} as Record<string, Mood>)

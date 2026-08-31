@@ -3,8 +3,7 @@
     <!-- 完成庆祝动画 -->
     <div class="pomo-celebrate" v-if="celebrateVisible" aria-hidden="true">
       <span v-for="i in 14" :key="i" class="celebrate-petal" :style="{ '--i': i }">✿</span>
-      <div class="celebrate-stamp">
-        🍅<br/>第 {{ todayCount }} 个
+      <div class="celebrate-stamp"><TomoIcon name="tomato" /><br/>第 {{ todayCount }} 个
       </div>
     </div>
 
@@ -27,8 +26,8 @@
 
     <!-- 顶部栏 -->
     <div class="pomo-topbar">
-      <div class="pomo-brand">🍅 TOMO</div>
-      <button class="pomo-exit" @click="$emit('close')">✕</button>
+      <div class="pomo-brand"><TomoIcon name="tomato" /> TOMO</div>
+      <button class="pomo-exit" @click="$emit('close')"><TomoIcon name="close" /></button>
     </div>
 
     <!-- TOMO 表情区 -->
@@ -100,7 +99,7 @@
         </div>
       </div>
       <div class="volume-row" v-if="currentSound !== 'none'">
-        <span class="vol-label">🔊</span>
+        <span class="vol-label"><TomoIcon name="sound-on" /></span>
         <input type="range" min="0" max="100" v-model.number="volume" class="vol-slider" @input="applyVolume" />
         <span class="vol-value">{{ volume }}</span>
       </div>
@@ -149,12 +148,12 @@ const bestStreak = ref(0)
 
 // 白噪音
 const sounds = [
-  { id: 'none', icon: '🔇', name: '静音' },
-  { id: 'rain', icon: '🌧️', name: '雨声' },
-  { id: 'kitchen', icon: '🍳', name: '厨房' },
-  { id: 'forest', icon: '🌲', name: '森林' },
-  { id: 'cafe', icon: '☕', name: '咖啡馆' },
-  { id: 'wave', icon: '🌊', name: '海浪' },
+  { id: 'none', icon: 'sound-off', name: '静音' },
+  { id: 'rain', icon: 'rain', name: '雨声' },
+  { id: 'kitchen', icon: 'pan', name: '厨房' },
+  { id: 'forest', icon: 'forest', name: '森林' },
+  { id: 'cafe', icon: 'coffee', name: '咖啡馆' },
+  { id: 'wave', icon: 'wave', name: '海浪' },
 ]
 const currentSound = ref<string>('none')
 const volume = ref<number>(50)
@@ -262,10 +261,10 @@ function applyVolume() {
 // TOMO 表情联动
 const tomoEmoji = computed(() => {
   switch (pomoState.value) {
-    case 'idle': return '🍅'
-    case 'running': return '🤒'
-    case 'paused': return '🤔'
-    case 'resting': return '😊'
+    case 'idle': return 'tomato'
+    case 'running': return 'face-sick'
+    case 'paused': return 'face-think'
+    case 'resting': return 'face-happy'
   }
 })
 const tomoMessage = computed(() => {

@@ -1,13 +1,13 @@
 <template>
   <div class="feature-panel personality-panel">
     <div class="panel-header">
-      <span class="panel-title">🧪 TOMO 性格测试</span>
-      <button class="panel-close" @click="$emit('close')">✕</button>
+      <span class="panel-title"><TomoIcon name="flask" /> TOMO 性格测试</span>
+      <button class="panel-close" @click="$emit('close')"><TomoIcon name="close" /></button>
     </div>
     <div class="panel-body">
       <!-- 介绍页 -->
       <div class="ptest-intro" v-if="ptestState === 'intro'">
-        <div class="ptest-intro-icon">🧪</div>
+        <div class="ptest-intro-icon"><TomoIcon name="flask" /></div>
         <p class="ptest-intro-title">你是哪种 TOMO？</p>
         <p class="ptest-intro-desc">
           做完 8 道题，发现你的 TOMO 人格类型。
@@ -42,7 +42,7 @@
             class="ptest-option"
             @click="answer(opt)"
           >
-            <span class="ptest-opt-emoji">{{ opt.emoji }}</span>
+            <span class="ptest-opt-emoji"><TomoIcon :name="opt.emoji" /></span>
             <span class="ptest-opt-text">{{ opt.label }}</span>
           </div>
         </div>
@@ -51,7 +51,7 @@
       <!-- 结果页 -->
       <div class="ptest-result" v-if="ptestState === 'finished' && result">
         <div class="result-card">
-          <div class="result-emoji">{{ result.emoji }}</div>
+          <div class="result-emoji"><TomoIcon :name="result.emoji" /></div>
           <div class="result-type-label">你的 TOMO 人格</div>
           <div class="result-name">{{ result.name }}</div>
           <div class="result-tags">
@@ -120,80 +120,80 @@ const questions: Question[] = [
     question: '砧板来了，你的第一反应？',
     scenario: '一把闪亮的菜刀就在旁边',
     options: [
-      { emoji: '🏃', label: '赶紧跑，能跑多远跑多远', scores: { escape: 3, brave: 0, social: 0, chill: 0 } },
-      { emoji: '🥶', label: '装死，假装自己不是番茄', scores: { escape: 1, brave: 0, social: 0, chill: 2 } },
-      { emoji: '⚔️', label: '反抗！凭什么要被切', scores: { escape: 0, brave: 3, social: 1, chill: 0 } },
-      { emoji: '😭', label: '先哭为敬', scores: { escape: 0, brave: 0, social: 1, chill: 1 } },
+      { emoji: 'run', label: '赶紧跑，能跑多远跑多远', scores: { escape: 3, brave: 0, social: 0, chill: 0 } },
+      { emoji: 'face-cold', label: '装死，假装自己不是番茄', scores: { escape: 1, brave: 0, social: 0, chill: 2 } },
+      { emoji: 'sword', label: '反抗！凭什么要被切', scores: { escape: 0, brave: 3, social: 1, chill: 0 } },
+      { emoji: 'face-cry', label: '先哭为敬', scores: { escape: 0, brave: 0, social: 1, chill: 1 } },
     ],
   },
   {
     question: '被厨师夸"好红好饱满"，你会？',
     scenario: '厨师拿着你端详',
     options: [
-      { emoji: '😳', label: '害羞，脸更红了', scores: { escape: 0, brave: 0, social: 1, chill: 2 } },
-      { emoji: '😎', label: '得意，我确实又红又饱满', scores: { escape: 0, brave: 2, social: 2, chill: 1 } },
-      { emoji: '😐', label: '无所谓，夸不夸都要被吃', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
-      { emoji: '🤔', label: '他为什么要夸我？有阴谋', scores: { escape: 1, brave: 1, social: 0, chill: 0 } },
+      { emoji: 'face-shy', label: '害羞，脸更红了', scores: { escape: 0, brave: 0, social: 1, chill: 2 } },
+      { emoji: 'face-cool', label: '得意，我确实又红又饱满', scores: { escape: 0, brave: 2, social: 2, chill: 1 } },
+      { emoji: 'face-flat', label: '无所谓，夸不夸都要被吃', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
+      { emoji: 'face-think', label: '他为什么要夸我？有阴谋', scores: { escape: 1, brave: 1, social: 0, chill: 0 } },
     ],
   },
   {
     question: '旁边有颗坏掉的番茄，你会？',
     scenario: '它已经开始发霉了',
     options: [
-      { emoji: '🤝', label: '关心它，问它还好吗', scores: { escape: 0, brave: 1, social: 3, chill: 1 } },
-      { emoji: '🏃', label: '离远点，别传染给我', scores: { escape: 3, brave: 0, social: 0, chill: 1 } },
-      { emoji: '😤', label: '庆幸自己还好好的', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
-      { emoji: '😭', label: '替它难过，它也曾很红', scores: { escape: 0, brave: 0, social: 2, chill: 1 } },
+      { emoji: 'handshake', label: '关心它，问它还好吗', scores: { escape: 0, brave: 1, social: 3, chill: 1 } },
+      { emoji: 'run', label: '离远点，别传染给我', scores: { escape: 3, brave: 0, social: 0, chill: 1 } },
+      { emoji: 'face-mad', label: '庆幸自己还好好的', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
+      { emoji: 'face-cry', label: '替它难过，它也曾很红', scores: { escape: 0, brave: 0, social: 2, chill: 1 } },
     ],
   },
   {
     question: '深夜躺在厨房台面上，你通常在？',
     scenario: '四下无人，灯光昏暗',
     options: [
-      { emoji: '💤', label: '已经睡着了', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
-      { emoji: '🎭', label: '想白天发生的事', scores: { escape: 0, brave: 0, social: 2, chill: 1 } },
-      { emoji: '🗺️', label: '规划逃跑路线', scores: { escape: 3, brave: 2, social: 0, chill: 0 } },
-      { emoji: '😨', label: '害怕明天会不会被切', scores: { escape: 1, brave: 0, social: 0, chill: 0 } },
+      { emoji: 'face-sleep', label: '已经睡着了', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
+      { emoji: 'mask', label: '想白天发生的事', scores: { escape: 0, brave: 0, social: 2, chill: 1 } },
+      { emoji: 'map', label: '规划逃跑路线', scores: { escape: 3, brave: 2, social: 0, chill: 0 } },
+      { emoji: 'face-scared', label: '害怕明天会不会被切', scores: { escape: 1, brave: 0, social: 0, chill: 0 } },
     ],
   },
   {
     question: '看到沙拉碗里的其他蔬菜，你？',
     scenario: '黄瓜、生菜、玉米都在碗里',
     options: [
-      { emoji: '👋', label: '主动打招呼，交个朋友', scores: { escape: 0, brave: 1, social: 3, chill: 1 } },
-      { emoji: '👀', label: '默默观察，不主动搭话', scores: { escape: 1, brave: 0, social: 0, chill: 2 } },
-      { emoji: '👑', label: '我才是主角，都让开', scores: { escape: 0, brave: 3, social: 1, chill: 1 } },
-      { emoji: '🚪', label: '趁机溜走，碗太危险', scores: { escape: 3, brave: 1, social: 0, chill: 0 } },
+      { emoji: 'wave-hand', label: '主动打招呼，交个朋友', scores: { escape: 0, brave: 1, social: 3, chill: 1 } },
+      { emoji: 'eyes', label: '默默观察，不主动搭话', scores: { escape: 1, brave: 0, social: 0, chill: 2 } },
+      { emoji: 'crown', label: '我才是主角，都让开', scores: { escape: 0, brave: 3, social: 1, chill: 1 } },
+      { emoji: 'door', label: '趁机溜走，碗太危险', scores: { escape: 3, brave: 1, social: 0, chill: 0 } },
     ],
   },
   {
     question: '终于逃出了厨房！你最先去哪？',
     scenario: '面前是广阔的餐厅',
     options: [
-      { emoji: '🌿', label: '花园，找片土壤躺平', scores: { escape: 1, brave: 0, social: 0, chill: 3 } },
-      { emoji: '👥', label: '去找其他番茄伙伴', scores: { escape: 0, brave: 1, social: 3, chill: 1 } },
-      { emoji: '🏔️', label: '冒险！去未知的地方探索', scores: { escape: 0, brave: 3, social: 1, chill: 0 } },
-      { emoji: '🏡', label: '找个角落躲好就行', scores: { escape: 3, brave: 0, social: 0, chill: 1 } },
+      { emoji: 'leaf', label: '花园，找片土壤躺平', scores: { escape: 1, brave: 0, social: 0, chill: 3 } },
+      { emoji: 'people', label: '去找其他番茄伙伴', scores: { escape: 0, brave: 1, social: 3, chill: 1 } },
+      { emoji: 'mountain', label: '冒险！去未知的地方探索', scores: { escape: 0, brave: 3, social: 1, chill: 0 } },
+      { emoji: 'house-small', label: '找个角落躲好就行', scores: { escape: 3, brave: 0, social: 0, chill: 1 } },
     ],
   },
   {
     question: '有人拍照发朋友圈说"看这颗番茄"，你？',
     scenario: '你被拍了下来',
     options: [
-      { emoji: '✌️', label: '摆pose！红出自信', scores: { escape: 0, brave: 2, social: 3, chill: 1 } },
-      { emoji: '🙈', label: '遮脸，不想被拍', scores: { escape: 2, brave: 0, social: 0, chill: 1 } },
-      { emoji: '😐', label: '无所谓，拍就拍吧', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
-      { emoji: '😠', label: '没经过同意就拍？生气', scores: { escape: 0, brave: 2, social: 0, chill: 0 } },
+      { emoji: 'peace', label: '摆pose！红出自信', scores: { escape: 0, brave: 2, social: 3, chill: 1 } },
+      { emoji: 'face-peek', label: '遮脸，不想被拍', scores: { escape: 2, brave: 0, social: 0, chill: 1 } },
+      { emoji: 'face-flat', label: '无所谓，拍就拍吧', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
+      { emoji: 'face-angry', label: '没经过同意就拍？生气', scores: { escape: 0, brave: 2, social: 0, chill: 0 } },
     ],
   },
   {
     question: '如果有一天你不再红了，你会？',
     scenario: '颜色开始变淡',
     options: [
-      { emoji: '🌈', label: '换个颜色继续精彩', scores: { escape: 0, brave: 3, social: 1, chill: 2 } },
-      { emoji: '😢', label: '难过，红是我的全部', scores: { escape: 0, brave: 0, social: 1, chill: 0 } },
-      { emoji: '🤷', label: '不红就不红吧，也挺好', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
-      { emoji: '🔬', label: '想办法变回来！', scores: { escape: 0, brave: 3, social: 0, chill: 0 } },
+      { emoji: 'rainbow', label: '换个颜色继续精彩', scores: { escape: 0, brave: 3, social: 1, chill: 2 } },
+      { emoji: 'face-sad', label: '难过，红是我的全部', scores: { escape: 0, brave: 0, social: 1, chill: 0 } },
+      { emoji: 'shrug', label: '不红就不红吧，也挺好', scores: { escape: 0, brave: 0, social: 0, chill: 3 } },
+      { emoji: 'microscope', label: '想办法变回来！', scores: { escape: 0, brave: 3, social: 0, chill: 0 } },
     ],
   },
 ]
@@ -201,7 +201,7 @@ const questions: Question[] = [
 const personalityTypes: PersonalityType[] = [
   {
     id: 'escapee',
-    emoji: '🏃',
+    emoji: 'run',
     name: '逃跑大师 TOMO',
     shortDesc: '三十六计走为上',
     tags: ['机智', '敏捷', '谨慎'],
@@ -217,7 +217,7 @@ const personalityTypes: PersonalityType[] = [
   },
   {
     id: 'warrior',
-    emoji: '⚔️',
+    emoji: 'sword',
     name: '番茄战士 TOMO',
     shortDesc: '我不做食材，我做自己',
     tags: ['勇敢', '热血', '不服'],
@@ -233,7 +233,7 @@ const personalityTypes: PersonalityType[] = [
   },
   {
     id: 'socialite',
-    emoji: '✌️',
+    emoji: 'peace',
     name: '社牛番茄 TOMO',
     shortDesc: '跟所有蔬菜都是朋友',
     tags: ['开朗', '社交', '自来熟'],
@@ -249,7 +249,7 @@ const personalityTypes: PersonalityType[] = [
   },
   {
     id: 'chiller',
-    emoji: '🌿',
+    emoji: 'leaf',
     name: '佛系番茄 TOMO',
     shortDesc: '不红不绿的日子也在生长',
     tags: ['佛系', '稳定', '躺平'],

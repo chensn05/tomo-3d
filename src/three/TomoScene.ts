@@ -189,7 +189,7 @@ export class TomoScene {
 
     // 食物小伙伴 - 只留鸡蛋
     const buddyConfigs = [
-      { name: '蛋蛋', emoji: '🥚', type: 'egg' as const },
+      { name: '蛋蛋', emoji: 'egg', type: 'egg' as const },
     ]
     const buddyPositions = [[0.45, 0.0, 0.5]]
     buddyConfigs.forEach((cfg, i) => {

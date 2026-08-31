@@ -1,15 +1,15 @@
 <template>
   <div class="feature-panel fortune-panel">
     <div class="panel-header">
-      <span class="panel-title">🔮 TOMO 玄学运势</span>
-      <button class="panel-close" @click="$emit('close')">✕</button>
+      <span class="panel-title"><TomoIcon name="crystal" /> TOMO 玄学运势</span>
+      <button class="panel-close" @click="$emit('close')"><TomoIcon name="close" /></button>
     </div>
     <div class="panel-body">
 
       <!-- 阶段1: 介绍 -->
       <div class="fortune-intro" v-if="stage === 'intro'">
         <div class="fortune-orbit-decor" aria-hidden="true"><span>☾</span><i>✦</i><b>✿</b></div>
-        <div class="fortune-tomo-icon">🔮</div>
+        <div class="fortune-tomo-icon"><TomoIcon name="crystal" /></div>
         <p class="fortune-hint">塔罗 × 周易 × 梅花易数 × 紫微</p>
         <p class="fortune-sub-hint">基于日期+专属口令，每日一卦，人人不同</p>
 
@@ -25,7 +25,7 @@
 
         <div class="fortune-user-info" v-else>
           <span class="fortune-moon-note">今日专属 · {{ userToken }}</span>
-          <span class="fortune-user-name">🔮 {{ userToken }} 的今日卦象</span>
+          <span class="fortune-user-name"><TomoIcon name="crystal" /> {{ userToken }} 的今日卦象</span>
           <button class="fortune-change-token" @click="userToken = ''; tokenInput = ''">修改</button>
         </div>
 
@@ -51,7 +51,7 @@
 
       <!-- 阶段3: 展扇选牌 -->
       <div class="fortune-spread" v-if="stage === 'spread'">
-        <p class="spread-hint">✨ 凭直觉选一张牌</p>
+        <p class="spread-hint"><TomoIcon name="sparkle" /> 凭直觉选一张牌</p>
         <div class="spread-cards">
           <div
             v-for="(card, i) in spreadCards"
@@ -94,8 +94,8 @@
       <div class="fortune-divining" v-if="stage === 'divining'">
         <div class="divine-icons">
           <span class="divine-icon">☰</span>
-          <span class="divine-icon">🌸</span>
-          <span class="divine-icon">⭐</span>
+          <span class="divine-icon"><TomoIcon name="flower" /></span>
+          <span class="divine-icon"><TomoIcon name="star" /></span>
         </div>
         <div class="divine-text">{{ divineStep }}</div>
         <div class="fortune-dots">
@@ -134,27 +134,27 @@
             <div class="gua-text">{{ currentFortune.gua.image }}</div>
           </div>
           <div class="gua-interpretation">
-            <span class="interp-icon">💡</span>
+            <span class="interp-icon"><TomoIcon name="idea" /></span>
             <span>{{ currentFortune.gua.interpretation }}</span>
           </div>
         </div>
 
         <!-- 梅花易数 -->
         <div class="result-section">
-          <div class="section-tag mei-tag">🌸 梅花易数</div>
+          <div class="section-tag mei-tag"><TomoIcon name="flower" /> 梅花易数</div>
           <div class="mei-nums">
             <div class="mei-num-item">
               <div class="mei-num-label">上卦</div>
               <div class="mei-num-val">{{ currentFortune.mei.upperNum }}</div>
               <div class="mei-num-tri">{{ currentFortune.mei.upperTrigram }}</div>
             </div>
-            <div class="mei-num-op">×</div>
+            <div class="mei-num-op"><TomoIcon name="close" /></div>
             <div class="mei-num-item">
               <div class="mei-num-label">下卦</div>
               <div class="mei-num-val">{{ currentFortune.mei.lowerNum }}</div>
               <div class="mei-num-tri">{{ currentFortune.mei.lowerTrigram }}</div>
             </div>
-            <div class="mei-num-op">→</div>
+            <div class="mei-num-op"><TomoIcon name="arrow-right" /></div>
             <div class="mei-num-item">
               <div class="mei-num-label">体用</div>
               <div class="mei-num-val mei-relation" :class="currentFortune.mei.relationType">
@@ -167,7 +167,7 @@
 
         <!-- 紫微斗数 -->
         <div class="result-section">
-          <div class="section-tag zi-tag">⭐ 紫微斗数</div>
+          <div class="section-tag zi-tag"><TomoIcon name="star" /> 紫微斗数</div>
           <div class="zi-main-star">
             <div class="zi-star-name">{{ currentFortune.ziwei.mainStar }}</div>
             <div class="zi-star-palace">{{ currentFortune.ziwei.palace }}</div>
@@ -214,15 +214,15 @@
 
         <!-- 连续签到 -->
         <div class="fortune-streak">
-          <div class="streak-flames">🔥×{{ streakDays }}</div>
+          <div class="streak-flames"><TomoIcon name="fire" /> ×{{ streakDays }}</div>
           <div class="streak-label">连续签到</div>
-          <div class="streak-reward" v-if="streakDays >= 3 && streakDays < 7">🔓 已解锁「领结」配件</div>
-          <div class="streak-reward" v-if="streakDays >= 7 && streakDays < 14">🔓 已解锁「皇冠」配件</div>
-          <div class="streak-reward" v-if="streakDays >= 14">🔓 已解锁「耳机」配件 · 满级！</div>
+          <div class="streak-reward" v-if="streakDays >= 3 && streakDays < 7"><TomoIcon name="lock-open" /> 已解锁「领结」配件</div>
+          <div class="streak-reward" v-if="streakDays >= 7 && streakDays < 14"><TomoIcon name="lock-open" /> 已解锁「皇冠」配件</div>
+          <div class="streak-reward" v-if="streakDays >= 14"><TomoIcon name="lock-open" /> 已解锁「耳机」配件 · 满级！</div>
           <div class="streak-next" v-if="streakDays < 14">再签 {{ nextRewardDays - streakDays }} 天解锁新配件</div>
         </div>
 
-        <div class="fortune-comeback">明日重卦 · 还剩 {{ hoursUntilTomorrow }} 小时 · TOMO 等你 🔮</div>
+        <div class="fortune-comeback"><TomoIcon name="crystal" /> 明日重卦 · 还剩 {{ hoursUntilTomorrow }} 小时 · TOMO 等你 </div>
       </div>
     </div>
   </div>
@@ -386,14 +386,14 @@ const meiRelations = [
 ]
 
 const fortuneExtras = [
-  { tier: 'great' as const, tierLabel: '大吉', poem: '紫气东来运势旺，番茄红透满庭芳。万事顺遂无阻碍，宜将剩勇追穷忙。', yi: '主动出击 · 拍板决策 · 请客吃饭 · 表达心意', ji: '犹豫不决 · 贪心不足 · 说"随便"', luck: [{ name: '事业', stars: '★★★★★' }, { name: '财运', stars: '★★★★★' }, { name: '社交', stars: '★★★★☆' }], tomoEmoji: '😎', tomoMsg: 'TOMO 说：今天你就是全场最红的番茄，冲！' },
-  { tier: 'great' as const, tierLabel: '大吉', poem: '一阳来复万象新，红运当头照此身。把握良机莫迟疑，今日不搏待何辰。', yi: '提需求 · 约人 · 冲动消费 · 摸鱼', ji: '加班 · 背锅 · 拖延', luck: [{ name: '事业', stars: '★★★★★' }, { name: '财运', stars: '★★★★☆' }, { name: '社交', stars: '★★★★★' }], tomoEmoji: '😳', tomoMsg: 'TOMO 说：被好运夸了都不好意思了，但确实是你应得的！' },
-  { tier: 'good' as const, tierLabel: '吉', poem: '小番茄圆又红，今日运势不算凶。稳稳当当过一天，下班可以去兜风。', yi: '按部就班 · 喝水 · 伸懒腰 · 整理桌面', ji: '逞强 · 熬夜 · 吃外卖', luck: [{ name: '事业', stars: '★★★★☆' }, { name: '财运', stars: '★★★☆☆' }, { name: '社交', stars: '★★★★☆' }], tomoEmoji: '🍅', tomoMsg: 'TOMO 说：平平淡淡才是真，今天也是饱满的一天。' },
-  { tier: 'good' as const, tierLabel: '吉', poem: '贵人星动福气来，番茄蒂绿果正开。遇到困难别硬扛，有人帮你渡难关。', yi: '求助同事 · 分享零食 · 请客', ji: '逞强 · 独狼 · 冷战', luck: [{ name: '事业', stars: '★★★★☆' }, { name: '财运', stars: '★★★★☆' }, { name: '社交', stars: '★★★★★' }], tomoEmoji: '😊', tomoMsg: 'TOMO 说：今天适合社交，害羞也没关系，迈出去就好~' },
-  { tier: 'mid' as const, tierLabel: '平', poem: '番茄躺在砧板旁，今日状态略迷茫。不急不躁慢慢来，过了今天就是光。', yi: '摸鱼 · 看文档 · 喝咖啡 · 放空', ji: '做大决定 · 签约 · 跳槽', luck: [{ name: '事业', stars: '★★★☆☆' }, { name: '财运', stars: '★★★☆☆' }, { name: '社交', stars: '★★☆☆☆' }], tomoEmoji: '🤔', tomoMsg: 'TOMO 说：迷茫也没事，先吃个番茄慢慢想。' },
-  { tier: 'mid' as const, tierLabel: '平', poem: '叶绿果红日正高，今日不急也不躁。虽无大喜也无忧，稳扎稳打慢慢熬。', yi: '做计划 · 学新东西 · 散步', ji: '内耗 · 对比 · 自我否定', luck: [{ name: '事业', stars: '★★★☆☆' }, { name: '财运', stars: '★★★☆☆' }, { name: '社交', stars: '★★★☆☆' }], tomoEmoji: '🍅', tomoMsg: 'TOMO 说：不红不绿的日子，也在生长。' },
-  { tier: 'bad' as const, tierLabel: '凶', poem: '番茄从台滚落地，今日诸事不太利。低调行事少开口，明早起来转运势。', yi: '低调 · 独处 · 戴耳机 · 请假', ji: '开会 · 做汇报 · 请客', luck: [{ name: '事业', stars: '★★☆☆☆' }, { name: '财运', stars: '★★☆☆☆' }, { name: '社交', stars: '★☆☆☆☆' }], tomoEmoji: '😢', tomoMsg: 'TOMO 说：今天我也难过，但明天一定会好的。' },
-  { tier: 'bad' as const, tierLabel: '大凶', poem: '砧板刀光闪寒芒，今日大凶莫逞强。宜静不宜宜藏拙，熬过今日是曙光。', yi: '装病 · 关通知 · 装死 · 摸鱼到底', ji: '背锅 · 主动加班 · 跟人争论', luck: [{ name: '事业', stars: '★☆☆☆☆' }, { name: '财运', stars: '★★☆☆☆' }, { name: '社交', stars: '★☆☆☆☆' }], tomoEmoji: '😭', tomoMsg: 'TOMO 说：今天我俩一起哭，但绝不认输！明天见！' },
+  { tier: 'great' as const, tierLabel: '大吉', poem: '紫气东来运势旺，番茄红透满庭芳。万事顺遂无阻碍，宜将剩勇追穷忙。', yi: '主动出击 · 拍板决策 · 请客吃饭 · 表达心意', ji: '犹豫不决 · 贪心不足 · 说"随便"', luck: [{ name: '事业', stars: '★★★★★' }, { name: '财运', stars: '★★★★★' }, { name: '社交', stars: '★★★★☆' }], tomoEmoji: 'face-cool', tomoMsg: 'TOMO 说：今天你就是全场最红的番茄，冲！' },
+  { tier: 'great' as const, tierLabel: '大吉', poem: '一阳来复万象新，红运当头照此身。把握良机莫迟疑，今日不搏待何辰。', yi: '提需求 · 约人 · 冲动消费 · 摸鱼', ji: '加班 · 背锅 · 拖延', luck: [{ name: '事业', stars: '★★★★★' }, { name: '财运', stars: '★★★★☆' }, { name: '社交', stars: '★★★★★' }], tomoEmoji: 'face-shy', tomoMsg: 'TOMO 说：被好运夸了都不好意思了，但确实是你应得的！' },
+  { tier: 'good' as const, tierLabel: '吉', poem: '小番茄圆又红，今日运势不算凶。稳稳当当过一天，下班可以去兜风。', yi: '按部就班 · 喝水 · 伸懒腰 · 整理桌面', ji: '逞强 · 熬夜 · 吃外卖', luck: [{ name: '事业', stars: '★★★★☆' }, { name: '财运', stars: '★★★☆☆' }, { name: '社交', stars: '★★★★☆' }], tomoEmoji: 'tomato', tomoMsg: 'TOMO 说：平平淡淡才是真，今天也是饱满的一天。' },
+  { tier: 'good' as const, tierLabel: '吉', poem: '贵人星动福气来，番茄蒂绿果正开。遇到困难别硬扛，有人帮你渡难关。', yi: '求助同事 · 分享零食 · 请客', ji: '逞强 · 独狼 · 冷战', luck: [{ name: '事业', stars: '★★★★☆' }, { name: '财运', stars: '★★★★☆' }, { name: '社交', stars: '★★★★★' }], tomoEmoji: 'face-happy', tomoMsg: 'TOMO 说：今天适合社交，害羞也没关系，迈出去就好~' },
+  { tier: 'mid' as const, tierLabel: '平', poem: '番茄躺在砧板旁，今日状态略迷茫。不急不躁慢慢来，过了今天就是光。', yi: '摸鱼 · 看文档 · 喝咖啡 · 放空', ji: '做大决定 · 签约 · 跳槽', luck: [{ name: '事业', stars: '★★★☆☆' }, { name: '财运', stars: '★★★☆☆' }, { name: '社交', stars: '★★☆☆☆' }], tomoEmoji: 'face-think', tomoMsg: 'TOMO 说：迷茫也没事，先吃个番茄慢慢想。' },
+  { tier: 'mid' as const, tierLabel: '平', poem: '叶绿果红日正高，今日不急也不躁。虽无大喜也无忧，稳扎稳打慢慢熬。', yi: '做计划 · 学新东西 · 散步', ji: '内耗 · 对比 · 自我否定', luck: [{ name: '事业', stars: '★★★☆☆' }, { name: '财运', stars: '★★★☆☆' }, { name: '社交', stars: '★★★☆☆' }], tomoEmoji: 'tomato', tomoMsg: 'TOMO 说：不红不绿的日子，也在生长。' },
+  { tier: 'bad' as const, tierLabel: '凶', poem: '番茄从台滚落地，今日诸事不太利。低调行事少开口，明早起来转运势。', yi: '低调 · 独处 · 戴耳机 · 请假', ji: '开会 · 做汇报 · 请客', luck: [{ name: '事业', stars: '★★☆☆☆' }, { name: '财运', stars: '★★☆☆☆' }, { name: '社交', stars: '★☆☆☆☆' }], tomoEmoji: 'face-sad', tomoMsg: 'TOMO 说：今天我也难过，但明天一定会好的。' },
+  { tier: 'bad' as const, tierLabel: '大凶', poem: '砧板刀光闪寒芒，今日大凶莫逞强。宜静不宜宜藏拙，熬过今日是曙光。', yi: '装病 · 关通知 · 装死 · 摸鱼到底', ji: '背锅 · 主动加班 · 跟人争论', luck: [{ name: '事业', stars: '★☆☆☆☆' }, { name: '财运', stars: '★★☆☆☆' }, { name: '社交', stars: '★☆☆☆☆' }], tomoEmoji: 'face-cry', tomoMsg: 'TOMO 说：今天我俩一起哭，但绝不认输！明天见！' },
 ]
 
 // ── 状态 ──

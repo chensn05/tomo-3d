@@ -23,26 +23,25 @@
     <!-- 点击雨滴后掉落的 TOMO 语录 -->
     <Transition name="quote-drop">
       <div v-if="activeQuote" class="tomo-quote-card" role="status">
-        <span class="quote-cloud-mark">☁</span>
+        <span class="quote-cloud-mark"><TomoIcon name="cloud" /></span>
         <span class="quote-text">{{ activeQuote }}</span>
-        <button class="quote-close" aria-label="关闭语录" @click="activeQuote = ''">×</button>
-        <button class="quote-save" aria-label="收进口袋" @click="saveCurrentQuote">收进口袋 ♡</button>
+        <button class="quote-close" aria-label="关闭语录" @click="activeQuote = ''"><TomoIcon name="close" /></button>
+        <button class="quote-save" aria-label="收进口袋" @click="saveCurrentQuote">收进口袋 <TomoIcon name="heart" /></button>
       </div>
     </Transition>
 
     <!-- TOMO 口袋 -->
-    <button class="pocket-fab" v-if="showUI && savedQuotes.length > 0" @click="pocketVisible = true" aria-label="TOMO 口袋">
-      🎒<span class="pocket-count">{{ savedQuotes.length }}</span>
+    <button class="pocket-fab" v-if="showUI && savedQuotes.length > 0" @click="pocketVisible = true" aria-label="TOMO 口袋"><TomoIcon name="backpack" /><span class="pocket-count">{{ savedQuotes.length }}</span>
     </button>
     <Transition name="quote-drop">
       <div v-if="pocketVisible" class="pocket-overlay" @click.self="pocketVisible = false">
         <div class="pocket-card">
-          <div class="pocket-title">🎒 TOMO 的口袋</div>
+          <div class="pocket-title"><TomoIcon name="backpack" /> TOMO 的口袋</div>
           <div class="pocket-sub">被你收起来的那些话</div>
           <div class="pocket-list">
             <div v-for="q in savedQuotes" :key="q" class="pocket-item">
               <span>“{{ q }}”</span>
-              <button class="pocket-remove" @click="removeSavedQuote(q)" aria-label="移除">×</button>
+              <button class="pocket-remove" @click="removeSavedQuote(q)" aria-label="移除"><TomoIcon name="close" /></button>
             </div>
           </div>
           <button class="pocket-close" @click="pocketVisible = false">合上口袋</button>
@@ -53,7 +52,7 @@
     <!-- 新手引导 -->
     <div class="onboarding-overlay" v-if="showOnboarding" @click.self="skipOnboarding">
       <div class="onboarding-card">
-        <div class="onboarding-icon">{{ onboardingSteps[onboardingStep].icon }}</div>
+        <div class="onboarding-icon"><TomoIcon :name="onboardingSteps[onboardingStep].icon" /></div>
         <div class="onboarding-title">{{ onboardingSteps[onboardingStep].title }}</div>
         <div class="onboarding-body">{{ onboardingSteps[onboardingStep].body }}</div>
         <div class="onboarding-dots">
@@ -62,7 +61,7 @@
         <div class="onboarding-actions">
           <button class="onboarding-skip" @click="skipOnboarding">跳过</button>
           <button class="onboarding-next" @click="nextOnboardingStep">
-            {{ onboardingStep === onboardingSteps.length - 1 ? '开始玩吧 ✦' : '下一步' }}
+            {{ onboardingStep === onboardingSteps.length - 1 ? '开始玩吧 ' : '下一步' }}
           </button>
         </div>
       </div>
@@ -82,7 +81,7 @@
 
     <!-- 情绪标签 -->
     <div class="emotion-badge" v-if="showUI && currentEmotion">
-      <span class="emoji">{{ currentEmotion.emoji }}</span>
+      <span class="emoji"><TomoIcon :name="currentEmotion.emoji" /></span>
       <span>{{ currentEmotion.label }}</span>
     </div>
 
@@ -105,7 +104,7 @@
         :class="{ active: currentEmotionId === emo.id }"
         @click="setEmotion(emo.id)"
       >
-        {{ emo.emoji }}
+        <TomoIcon :name="emo.emoji" />
       </div>
     </div>
 
@@ -116,11 +115,10 @@
     </div>
 
     <!-- 滚动提示 -->
-    <div class="scroll-hint" v-if="showUI && activePanel === 'story' && chapterIndex < chapters.length - 1 && !storyHidden">← → 翻页 · 拖拽TOMO移动 · 双击重置</div>
+    <div class="scroll-hint" v-if="showUI && activePanel === 'story' && chapterIndex < chapters.length - 1 && !storyHidden"><TomoIcon name="arrow-left" /> <TomoIcon name="arrow-right" /> 翻页 · 拖拽TOMO移动 · 双击重置</div>
 
     <!-- 显示故事按钮 (隐藏时出现) -->
-    <div class="show-story-btn" v-if="showUI && activePanel === 'story' && storyHidden" @click="toggleStory">
-      📖 显示故事
+    <div class="show-story-btn" v-if="showUI && activePanel === 'story' && storyHidden" @click="toggleStory"><TomoIcon name="book" /> 显示故事
     </div>
 
     <!-- ====== 功能面板 ====== -->
@@ -128,8 +126,8 @@
     <!-- DIY 配件工坊 -->
     <div class="feature-panel" v-if="showUI && activePanel === 'workshop'">
       <div class="panel-header">
-        <span class="panel-title">🎭 DIY 配件工坊</span>
-        <button class="panel-close" @click="closePanel">✕</button>
+        <span class="panel-title"><TomoIcon name="mask" /> DIY 配件工坊</span>
+        <button class="panel-close" @click="closePanel"><TomoIcon name="close" /></button>
       </div>
       <div class="panel-body">
         <div class="workshop-section">
@@ -142,7 +140,7 @@
               :class="{ active: activeAccessories.includes(acc.id) }"
               @click="toggleAccessory(acc.id)"
             >
-              <span class="acc-emoji">{{ acc.emoji }}</span>
+              <span class="acc-emoji"><TomoIcon :name="acc.emoji" /></span>
               <span class="acc-name">{{ acc.name }}</span>
             </div>
           </div>
@@ -167,8 +165,8 @@
     <!-- 场景切换 -->
     <div class="feature-panel" v-if="showUI && activePanel === 'scenes'">
       <div class="panel-header">
-        <span class="panel-title">🏞️ 场景切换</span>
-        <button class="panel-close" @click="closePanel">✕</button>
+        <span class="panel-title"><TomoIcon name="scene" /> 场景切换</span>
+        <button class="panel-close" @click="closePanel"><TomoIcon name="close" /></button>
       </div>
       <div class="panel-body">
         <div class="scene-grid">
@@ -180,7 +178,7 @@
             @click="setScene(s.id)"
           >
             <div class="scene-preview" :style="{ background: s.gradient }">
-              <span class="scene-emoji">{{ s.emoji }}</span>
+              <span class="scene-emoji"><TomoIcon :name="s.emoji" /></span>
             </div>
             <span class="scene-name">{{ s.name }}</span>
           </div>
@@ -192,8 +190,8 @@
     <!-- TOMO 图鉴 -->
     <div class="feature-panel codex-panel" v-if="showUI && activePanel === 'codex'">
       <div class="panel-header">
-        <span class="panel-title">📖 TOMO 图鉴</span>
-        <button class="panel-close" @click="closePanel">✕</button>
+        <span class="panel-title"><TomoIcon name="book" /> TOMO 图鉴</span>
+        <button class="panel-close" @click="closePanel"><TomoIcon name="close" /></button>
       </div>
       <div class="panel-body">
         <div class="codex-grid">
@@ -204,7 +202,7 @@
             :class="{ active: currentEmotionId === emo.id }"
             @click="setEmotion(emo.id)"
           >
-            <div class="codex-emoji">{{ emo.emoji }}</div>
+            <div class="codex-emoji"><TomoIcon :name="emo.emoji" /></div>
             <div class="codex-label">{{ emo.label }}</div>
             <div class="codex-desc">{{ getCodexDesc(emo.id) }}</div>
           </div>
@@ -277,13 +275,13 @@
     <div class="photo-modal" v-if="showPhotoModal" @click.self="showPhotoModal = false">
       <div class="photo-modal-content">
         <div class="photo-modal-header">
-          <span>📸 TOMO 拍照</span>
-          <button @click="showPhotoModal = false">✕</button>
+          <span><TomoIcon name="camera" /> TOMO 拍照</span>
+          <button @click="showPhotoModal = false"><TomoIcon name="close" /></button>
         </div>
         <img :src="photoDataUrl" class="photo-preview" v-if="photoDataUrl" />
         <div class="photo-watermark">TOMO · TOMATO STORIES</div>
         <a :href="photoDataUrl" download="tomo-photo.png" class="photo-download-btn">
-          下载图片 ↓
+          下载图片 <TomoIcon name="arrow-down" />
         </a>
       </div>
     </div>
@@ -291,48 +289,48 @@
     <!-- ====== 底部功能栏 ====== -->
     <div class="feature-dock" v-if="showUI">
       <button class="dock-btn" :class="{ active: activePanel === 'story' }" @click="openPanel('story')">
-        <span class="dock-icon">📖</span>
+        <span class="dock-icon"><TomoIcon name="book" /></span>
         <span class="dock-label">故事</span>
       </button>
       <button class="dock-btn" :class="{ active: activePanel === 'workshop' }" @click="openPanel('workshop')">
-        <span class="dock-icon">🎭</span>
+        <span class="dock-icon"><TomoIcon name="mask" /></span>
         <span class="dock-label">DIY</span>
       </button>
       <button class="dock-btn" :class="{ active: activePanel === 'scenes' }" @click="openPanel('scenes')">
-        <span class="dock-icon">🏞️</span>
+        <span class="dock-icon"><TomoIcon name="scene" /></span>
         <span class="dock-label">场景</span>
       </button>
       <button class="dock-btn" :class="{ active: activePanel === 'codex' }" @click="openPanel('codex')">
-        <span class="dock-icon">📚</span>
+        <span class="dock-icon"><TomoIcon name="books" /></span>
         <span class="dock-label">图鉴</span>
       </button>
       <div class="dock-divider"></div>
       <button class="dock-btn" :class="{ active: activePanel === 'pomodoro' }" @click="openPanel('pomodoro')">
-        <span class="dock-icon">⏱️</span>
+        <span class="dock-icon"><TomoIcon name="clock" /></span>
         <span class="dock-label">番茄钟</span>
       </button>
       <button class="dock-btn" :class="{ active: activePanel === 'fortune' }" @click="openPanel('fortune')">
-        <span class="dock-icon">🔮</span>
+        <span class="dock-icon"><TomoIcon name="crystal" /></span>
         <span class="dock-label">运势</span>
       </button>
       <button class="dock-btn" :class="{ active: activePanel === 'treehole' }" @click="openPanel('treehole')">
-        <span class="dock-icon">🌳</span>
+        <span class="dock-icon"><TomoIcon name="tree" /></span>
         <span class="dock-label">树洞</span>
       </button>
       <button class="dock-btn" :class="{ active: activePanel === 'personality' }" @click="openPanel('personality')">
-        <span class="dock-icon">🧪</span>
+        <span class="dock-icon"><TomoIcon name="flask" /></span>
         <span class="dock-label">性格</span>
       </button>
       <button class="dock-btn" :class="{ active: activePanel === 'garden' }" @click="openPanel('garden')">
-        <span class="dock-icon">🌱</span>
+        <span class="dock-icon"><TomoIcon name="sprout" /></span>
         <span class="dock-label">番茄园</span>
       </button>
       <button class="dock-btn" :class="{ active: activePanel === 'mixer' }" @click="openPanel('mixer')">
-        <span class="dock-icon">🎨</span>
+        <span class="dock-icon"><TomoIcon name="palette" /></span>
         <span class="dock-label">鸡尾酒</span>
       </button>
       <button class="dock-btn" :class="{ active: activePanel === 'merch' }" @click="openPanel('merch')">
-        <span class="dock-icon">🎁</span>
+        <span class="dock-icon"><TomoIcon name="gift" /></span>
         <span class="dock-label">周边</span>
       </button>
     </div>
@@ -431,11 +429,11 @@ const merchDetailItem = ref<MerchDisplay | null>(null)
 const showOnboarding = ref(false)
 const onboardingStep = ref(0)
 const onboardingSteps = [
-  { icon: '🤗', title: '欢迎来到 TOMO 的世界', body: '这是一颗有情绪的小番茄，住在梦幻的房间里。' },
-  { icon: '✋', title: '拖动 TOMO 到处玩', body: '按住 TOMO 可以把它拖到桌子任意位置，点它会切换心情，双击屏幕可以归位。' },
-  { icon: '💧', title: '戳一戳雨滴和云朵', body: '下雨时会掉落 TOMO 想对你说的话，点击云朵也有惊喜。喜欢的句子可以收进口袋。' },
-  { icon: '🎁', title: '桌子上的小物件都能拖', body: '插画卡、冰箱贴、钥匙扣都是你的桌面摆件，随便布置。点击可以看大图。' },
-  { icon: '⏱️', title: '番茄钟会照顾番茄园', body: '专注完成的次数越多，番茄园可以浇的水就越多，慢慢养成一颗属于你的番茄。' },
+  { icon: 'face-happy', title: '欢迎来到 TOMO 的世界', body: '这是一颗有情绪的小番茄，住在梦幻的房间里。' },
+  { icon: 'hand-stop', title: '拖动 TOMO 到处玩', body: '按住 TOMO 可以把它拖到桌子任意位置，点它会切换心情，双击屏幕可以归位。' },
+  { icon: 'water', title: '戳一戳雨滴和云朵', body: '下雨时会掉落 TOMO 想对你说的话，点击云朵也有惊喜。喜欢的句子可以收进口袋。' },
+  { icon: 'gift', title: '桌子上的小物件都能拖', body: '插画卡、冰箱贴、钥匙扣都是你的桌面摆件，随便布置。点击可以看大图。' },
+  { icon: 'clock', title: '番茄钟会照顾番茄园', body: '专注完成的次数越多，番茄园可以浇的水就越多，慢慢养成一颗属于你的番茄。' },
 ]
 function nextOnboardingStep() {
   if (onboardingStep.value < onboardingSteps.length - 1) {
@@ -496,13 +494,13 @@ const currentChapter = computed(() => {
 
 // 配件选项
 const accessoryOptions = [
-  { id: 'glasses', emoji: '👓', name: '眼镜' },
-  { id: 'sunglasses', emoji: '🕶️', name: '墨镜' },
-  { id: 'hat', emoji: '🎩', name: '礼帽' },
-  { id: 'bowtie', emoji: '🎀', name: '领结' },
-  { id: 'mustache', emoji: '👨', name: '胡子' },
-  { id: 'headphones', emoji: '🎧', name: '耳机' },
-  { id: 'crown', emoji: '👑', name: '皇冠' },
+  { id: 'glasses', emoji: 'glasses', name: '眼镜' },
+  { id: 'sunglasses', emoji: 'sunglasses', name: '墨镜' },
+  { id: 'hat', emoji: 'hat', name: '礼帽' },
+  { id: 'bowtie', emoji: 'ribbon', name: '领结' },
+  { id: 'mustache', emoji: 'person', name: '胡子' },
+  { id: 'headphones', emoji: 'headphone', name: '耳机' },
+  { id: 'crown', emoji: 'crown', name: '皇冠' },
 ]
 
 // 颜色选项
@@ -520,9 +518,9 @@ const colorOptions = [
 
 // 场景选项
 const sceneOptions = [
-  { id: 'kitchen' as SceneTheme, emoji: '🏠', name: '暖室', gradient: 'linear-gradient(135deg, #f5ead0, #e8d5b8)' },
-  { id: 'garden' as SceneTheme, emoji: '🌿', name: '森系清晨', gradient: 'linear-gradient(135deg, #e4f0d7, #b9d8bd)' },
-  { id: 'sunset' as SceneTheme, emoji: '🌅', name: '黄昏', gradient: 'linear-gradient(135deg, #f0d0a8, #e0b888)' },
+  { id: 'kitchen' as SceneTheme, emoji: 'home', name: '暖室', gradient: 'linear-gradient(135deg, #f5ead0, #e8d5b8)' },
+  { id: 'garden' as SceneTheme, emoji: 'leaf', name: '森系清晨', gradient: 'linear-gradient(135deg, #e4f0d7, #b9d8bd)' },
+  { id: 'sunset' as SceneTheme, emoji: 'sunrise', name: '黄昏', gradient: 'linear-gradient(135deg, #f0d0a8, #e0b888)' },
 ]
 
 // 图鉴描述

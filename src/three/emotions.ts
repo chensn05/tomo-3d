@@ -15,7 +15,7 @@ export interface Emotion {
 export const emotions: Emotion[] = [
   {
     id: 'idle',
-    emoji: '🍅',
+    emoji: 'tomato',
     label: '平静',
     color: 0xee4444,
     leafColor: 0x2ed573,
@@ -26,7 +26,7 @@ export const emotions: Emotion[] = [
   },
   {
     id: 'shy',
-    emoji: '😊',
+    emoji: 'face-happy',
     label: '害羞',
     color: 0xff5555,
     leafColor: 0x2ed573,
@@ -39,7 +39,7 @@ export const emotions: Emotion[] = [
   },
   {
     id: 'angry',
-    emoji: '😠',
+    emoji: 'face-angry',
     label: '生气',
     color: 0xdd2222,
     leafColor: 0x2ed573,
@@ -52,7 +52,7 @@ export const emotions: Emotion[] = [
   },
   {
     id: 'bored',
-    emoji: '😒',
+    emoji: 'face-smug',
     label: '无聊',
     color: 0xcc3838,
     leafColor: 0x2db567,
@@ -63,7 +63,7 @@ export const emotions: Emotion[] = [
   },
   {
     id: 'confused',
-    emoji: '🤔',
+    emoji: 'face-think',
     label: '困惑',
     color: 0xee4444,
     leafColor: 0x2ed573,
@@ -75,7 +75,7 @@ export const emotions: Emotion[] = [
   },
   {
     id: 'flattered',
-    emoji: '😳',
+    emoji: 'face-shy',
     label: '被夸了',
     color: 0xff5566,
     leafColor: 0x2ed573,
@@ -88,7 +88,7 @@ export const emotions: Emotion[] = [
   },
   {
     id: 'crying',
-    emoji: '😭',
+    emoji: 'face-cry',
     label: '大哭',
     color: 0xdd3333,
     leafColor: 0x2ed573,
@@ -101,7 +101,7 @@ export const emotions: Emotion[] = [
   },
   {
     id: 'sad',
-    emoji: '😢',
+    emoji: 'face-sad',
     label: '难过',
     color: 0xcc3838,
     leafColor: 0x2db567,
@@ -114,7 +114,7 @@ export const emotions: Emotion[] = [
   },
   {
     id: 'sick',
-    emoji: '🤒',
+    emoji: 'face-sick',
     label: '生病了',
     color: 0xcc4040,
     leafColor: 0x2db567,
@@ -127,7 +127,7 @@ export const emotions: Emotion[] = [
   },
   {
     id: 'cool',
-    emoji: '😎',
+    emoji: 'face-cool',
     label: '耍酷',
     color: 0xee4444,
     leafColor: 0x2ed573,

@@ -1,14 +1,15 @@
 import { createApp } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import TomoIcon from './components/TomoIcon.vue'
+import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 import './style.css'
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     { path: '/', component: () => import('./pages/Home.vue') },
     { path: '/story', component: () => import('./pages/Story.vue') },
   ],
 })
 
-createApp(App).use(router).mount('#app')
+createApp(App).component('TomoIcon', TomoIcon).use(router).mount('#app')

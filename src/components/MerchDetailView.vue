@@ -29,7 +29,7 @@
       </div>
 
       <!-- 关闭 -->
-      <button class="stage-close" @click="close">✕</button>
+      <button class="stage-close" @click="close"><TomoIcon name="close" /></button>
     </div>
   </div>
 </template>

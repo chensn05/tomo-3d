@@ -2,7 +2,7 @@
   <div class="home-container">
     <img class="home-title-art" src="/brand/tomo-title.svg" alt="TOMO" />
     <div class="home-subtitle">一颗有情绪的番茄</div>
-    <button class="home-enter-btn" @click="enterStory">进入 TOMO 的世界 →</button>
+    <button class="home-enter-btn" @click="enterStory">进入 TOMO 的世界 <TomoIcon name="arrow-right" /></button>
   </div>
 </template>
 

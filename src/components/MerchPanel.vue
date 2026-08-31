@@ -1,8 +1,8 @@
 <template>
   <div class="feature-panel merch-panel">
     <div class="panel-header">
-      <span class="panel-title">🎨 TOMO 插画馆</span>
-      <button class="panel-close" @click="$emit('close')">✕</button>
+      <span class="panel-title"><TomoIcon name="palette" /> TOMO 插画馆</span>
+      <button class="panel-close" @click="$emit('close')"><TomoIcon name="close" /></button>
     </div>
     <div class="panel-body">
 
@@ -25,7 +25,7 @@
             <div class="art-name">{{ art.name }}</div>
             <div class="art-style">{{ art.style }}</div>
           </div>
-          <div class="art-download" @click.stop="downloadArt(art)">↓</div>
+          <div class="art-download" @click.stop="downloadArt(art)"><TomoIcon name="arrow-down" /></div>
         </div>
       </div>
 
@@ -37,7 +37,7 @@
               <div class="detail-name">{{ selectedArt.name }}</div>
               <div class="detail-style">{{ selectedArt.style }}</div>
             </div>
-            <button @click="selectedArt = null">✕</button>
+            <button @click="selectedArt = null"><TomoIcon name="close" /></button>
           </div>
           <img :src="selectedArt.image" class="detail-art-img" />
           <div class="detail-desc">{{ selectedArt.desc }}</div>

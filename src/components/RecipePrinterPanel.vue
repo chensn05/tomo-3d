@@ -1,15 +1,15 @@
 <template>
   <div class="feature-panel printer-panel">
     <div class="panel-header">
-      <span class="panel-title">🖨️ TOMO 美食漫画打印机</span>
-      <button class="panel-close" @click="$emit('close')">✕</button>
+      <span class="panel-title"><TomoIcon name="printer" /> TOMO 美食漫画打印机</span>
+      <button class="panel-close" @click="$emit('close')"><TomoIcon name="close" /></button>
     </div>
     <div class="panel-body">
 
       <!-- API Key 设置入口 -->
       <div class="api-key-bar" v-if="stage === 'input' && !photoDataUrl">
         <button class="api-key-btn" @click="showKeyModal = true">
-          {{ hasApiKey ? `🔑 ${currentProviderName} 已配置` : '🔑 配置 AI 生图 Key（可选）' }}
+          {{ hasApiKey ? `${currentProviderName} 已配置` : '配置 AI 生图 Key（可选）' }}
         </button>
         <div class="api-key-hint" v-if="!hasApiKey">
           配置后用 AI 生成手绘漫画风，不配则用本地滤镜
@@ -19,7 +19,7 @@
       <!-- API Key 弹窗 -->
       <div class="key-modal" v-if="showKeyModal" @click.self="showKeyModal = false">
         <div class="key-modal-content">
-          <div class="key-modal-title">🔑 AI 生图配置</div>
+          <div class="key-modal-title"><TomoIcon name="key" /> AI 生图配置</div>
           <div class="provider-tabs">
             <div class="provider-tab" :class="{ active: provider === 'pollinations' }" @click="provider = 'pollinations'">免费(无Key)</div>
             <div class="provider-tab" :class="{ active: provider === 'gemini' }" @click="provider = 'gemini'">Gemini</div>
@@ -41,24 +41,22 @@
 
       <!-- 阶段1: 拍照/上传 -->
       <div class="printer-input-stage" v-if="stage === 'input'">
-        <div class="printer-icon-big">🖨️</div>
+        <div class="printer-icon-big"><TomoIcon name="printer" /></div>
         <p class="printer-hint">拍一张食物照片</p>
         <p class="printer-sub-hint">TOMO 自动生成手绘漫画风食谱卡</p>
 
         <div class="printer-upload-area">
-          <label class="printer-camera-btn">
-            📷 拍照
+          <label class="printer-camera-btn"><TomoIcon name="camera" /> 拍照
             <input type="file" accept="image/*" capture="environment" @change="onPhotoSelect" hidden />
           </label>
-          <label class="printer-upload-btn">
-            🖼️ 从相册选
+          <label class="printer-upload-btn"><TomoIcon name="photo-frame" /> 从相册选
             <input type="file" accept="image/*" @change="onPhotoSelect" hidden />
           </label>
         </div>
 
         <div class="printer-preview" v-if="photoDataUrl">
           <img :src="photoDataUrl" class="preview-img" />
-          <div class="preview-overlay"><span>✓ 照片已选</span></div>
+          <div class="preview-overlay"><span><TomoIcon name="check" /> 照片已选</span></div>
         </div>
 
         <div class="recipe-form" v-if="photoDataUrl">
@@ -79,13 +77,13 @@
         </div>
 
         <button class="printer-start-btn" v-if="photoDataUrl" @click="generateComic">
-          {{ hasApiKey ? '🎨 AI 生成漫画风格' : '🎨 生成本地漫画风格' }}
+          {{ hasApiKey ? ' AI 生成漫画风格' : ' 生成本地漫画风格' }}
         </button>
       </div>
 
       <!-- 阶段2: 生成中 -->
       <div class="printer-generating-stage" v-if="stage === 'generating'">
-        <div class="generating-icon">{{ hasApiKey ? '🤖' : '🎨' }}</div>
+        <div class="generating-icon">{{ hasApiKey ? '' : '' }}</div>
         <div class="generating-text">{{ genStepText }}</div>
         <div class="generating-progress">
           <div class="gen-progress-fill" :style="{ width: genProgress + '%' }"></div>
@@ -100,20 +98,20 @@
           <div class="compare-images">
             <div class="compare-item">
               <img :src="photoDataUrl" class="compare-img" />
-              <div class="compare-tag">📷 原图</div>
+              <div class="compare-tag"><TomoIcon name="camera" /> 原图</div>
             </div>
-            <div class="compare-arrow">→</div>
+            <div class="compare-arrow"><TomoIcon name="arrow-right" /></div>
             <div class="compare-item">
               <canvas ref="comicPreviewCanvas" width="300" height="225" class="compare-canvas"></canvas>
-              <div class="compare-tag comic">🎨 漫画</div>
+              <div class="compare-tag comic"><TomoIcon name="palette" /> 漫画</div>
             </div>
           </div>
         </div>
         <div class="regen-row">
-          <button class="regen-btn" @click="regenerateComic">🔄 重新生成</button>
+          <button class="regen-btn" @click="regenerateComic"><TomoIcon name="refresh" /> 重新生成</button>
           <button class="regen-style-btn" @click="changeStyle">切换风格 ({{ currentStyleName }})</button>
         </div>
-        <button class="printer-print-btn" @click="startPrinting">🖨️ 开始打印</button>
+        <button class="printer-print-btn" @click="startPrinting"><TomoIcon name="printer" /> 开始打印</button>
       </div>
 
       <!-- 阶段4: 3D打印动画 -->
@@ -130,7 +128,7 @@
 
       <!-- 阶段5: 打印完成 -->
       <div class="printer-done-stage" v-if="stage === 'done'">
-        <p class="done-title">✅ 打印完成！</p>
+        <p class="done-title"><TomoIcon name="check" /> 打印完成！</p>
         <div class="done-card-wrapper">
           <canvas ref="recipeCanvas" width="400" height="560" class="recipe-card-canvas"></canvas>
         </div>
@@ -168,7 +166,7 @@ const comicPreviewCanvas = ref<HTMLCanvasElement>()
 const recipeCanvas = ref<HTMLCanvasElement>()
 const printerCanvasContainer = ref<HTMLElement>()
 
-const foodTags = ['🍅 好吃', '🔥 火气大', '😋 回味', '💪 补充能量', '🌙 适合夜宵', '☀️ 早餐好选', '🎨 颜值高', '🌶️ 辣']
+const foodTags = ['好吃', '火气大', '回味', '补充能量', '适合夜宵', '早餐好选', '颜值高', '辣']
 
 // ── 多 Provider 配置 ──
 type Provider = 'pollinations' | 'gemini' | 'openai' | 'stability'
@@ -604,7 +602,7 @@ function drawRecipeText(ctx: CanvasRenderingContext2D, w: number, h: number, sta
   ctx.save(); ctx.translate(w - 75, startY + 95); ctx.rotate(-0.15)
   ctx.strokeStyle = '#FF6B6B'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.roundRect(-38, -16, 76, 32, 8); ctx.stroke()
   ctx.fillStyle = '#FF6B6B'; ctx.font = 'bold 11px "PingFang SC"'; ctx.fillText('TOMO 认证', 0, 5); ctx.restore()
-  ctx.font = '20px Arial'; ctx.textAlign = 'left'; ctx.fillText('🍅', 25, startY + 100)
+  ctx.font = '20px Arial'; ctx.textAlign = 'left'; ctx.fillText('tomato', 25, startY + 100)
   const now = new Date()
   const dateStr = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`
   ctx.fillStyle = '#BBA080'; ctx.font = '11px Arial'; ctx.textAlign = 'left'; ctx.fillText(dateStr, 30, h - 18)

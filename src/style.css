@@ -762,3 +762,19 @@ body {
 @media (max-width: 768px) and (orientation: portrait) {
   :root { --chip-h: 32px; }
 }
+
+/* ═══ TOMO 手绘图标系统 ═══ */
+.tomo-icon { display: inline-block; vertical-align: -0.14em; }
+.acc-emoji .tomo-icon,
+.codex-emoji .tomo-icon,
+.mood-emoji .tomo-icon,
+.sound-icon .tomo-icon,
+.scene-emoji .tomo-icon { width: 1.25em; height: 1.25em; vertical-align: middle; }
+.dock-icon .tomo-icon { width: 1.45em; height: 1.45em; vertical-align: middle; }
+.emotion-chip .tomo-icon { width: 1.5em; height: 1.5em; vertical-align: middle; }
+.emotion-badge .emoji .tomo-icon { width: 1.3em; height: 1.3em; }
+.emotion-chip { display: flex; align-items: center; justify-content: center; }
+.dock-icon { display: flex; align-items: center; justify-content: center; line-height: 1; }
+.panel-title .tomo-icon { width: 1.15em; height: 1.15em; margin-right: 2px; }
+.panel-close .tomo-icon, .quote-close .tomo-icon, .pocket-remove .tomo-icon { width: .8em; height: .8em; }
+.onboarding-icon .tomo-icon { width: 1em; height: 1em; }

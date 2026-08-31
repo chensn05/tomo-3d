@@ -43,7 +43,7 @@ export class ParticleSystem {
     hctx.font = '48px Arial'
     hctx.textAlign = 'center'
     hctx.textBaseline = 'middle'
-    hctx.fillText('♥', 32, 32)
+    hctx.fillText('heart', 32, 32)
     this.heartTexture = new THREE.CanvasTexture(heartCanvas)
     this.heartTexture.colorSpace = THREE.SRGBColorSpace
 
