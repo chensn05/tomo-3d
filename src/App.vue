@@ -81,7 +81,7 @@
 
     <!-- 情绪标签 -->
     <div class="emotion-badge" v-if="showUI && currentEmotion">
-      <span class="emoji"><TomoIcon :name="currentEmotion.emoji" /></span>
+      <span class="emoji">{{ currentEmotion.emoji }}</span>
       <span>{{ currentEmotion.label }}</span>
     </div>
 
@@ -104,7 +104,7 @@
         :class="{ active: currentEmotionId === emo.id }"
         @click="setEmotion(emo.id)"
       >
-        <TomoIcon :name="emo.emoji" />
+        {{ emo.emoji }}
       </div>
     </div>
 
@@ -202,7 +202,7 @@
             :class="{ active: currentEmotionId === emo.id }"
             @click="setEmotion(emo.id)"
           >
-            <div class="codex-emoji"><TomoIcon :name="emo.emoji" /></div>
+            <div class="codex-emoji">{{ emo.emoji }}</div>
             <div class="codex-label">{{ emo.label }}</div>
             <div class="codex-desc">{{ getCodexDesc(emo.id) }}</div>
           </div>
