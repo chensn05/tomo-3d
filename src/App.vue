@@ -666,12 +666,16 @@ function enterStory() {
   }
 }
 
-// 路由变化时进入/退出故事模式
+// 路由变化时进入/退出故事模式（immediate: 直接落地 /story 也要初始化 UI）
 watch(() => router.currentRoute.value.path, (path) => {
   if (path === '/story' && !showUI.value) {
-    enterStory()
+    showUI.value = true
+    triggerChapter()
+    if (!localStorage.getItem('tomo-onboarded')) {
+      setTimeout(() => { showOnboarding.value = true }, 800)
+    }
   }
-})
+}, { immediate: true })
 
 onMounted(async () => {
   if (!canvasContainer.value) return
