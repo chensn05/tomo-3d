@@ -777,3 +777,12 @@ body {
 .panel-title .tomo-icon { width: 1.15em; height: 1.15em; margin-right: 2px; }
 .panel-close .tomo-icon, .quote-close .tomo-icon, .pocket-remove .tomo-icon { width: .8em; height: .8em; }
 .onboarding-icon .tomo-icon { width: 1em; height: 1em; }
+
+/* ── 面板打开时：面板叠在 dock 上方，dock 自动隐身 ── */
+.app-container:has(.feature-panel:not(.codex-panel)) .feature-dock,
+.app-container:has(.feature-panel:not(.codex-panel)) .emotion-picker {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.feature-dock, .emotion-picker { transition: opacity .25s; }

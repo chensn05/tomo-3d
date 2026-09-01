@@ -32,7 +32,7 @@
 
     <!-- TOMO 表情区 -->
     <div class="pomo-tomo-area">
-      <div class="pomo-tomo-emoji">{{ tomoEmoji }}</div>
+      <div class="pomo-tomo-emoji"><TomoIcon :name="tomoEmoji" /></div>
       <div class="pomo-tomo-msg">{{ tomoMessage }}</div>
     </div>
 
@@ -94,7 +94,7 @@
           :class="{ active: currentSound === s.id }"
           @click="selectSound(s.id)"
         >
-          <span class="sound-icon">{{ s.icon }}</span>
+          <span class="sound-icon"><TomoIcon :name="s.icon" /></span>
           <span class="sound-name">{{ s.name }}</span>
         </div>
       </div>
