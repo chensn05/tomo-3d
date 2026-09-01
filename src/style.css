@@ -786,3 +786,13 @@ body {
   transition: opacity .2s;
 }
 .feature-dock, .emotion-picker { transition: opacity .25s; }
+
+/* 面板再抬高：底部完全遮住 dock，不漏缝隙 */
+.feature-panel {
+  bottom: 0 !important;
+  border-radius: 22px 22px 0 0 !important;
+  max-height: calc(100dvh - 90px) !important;
+}
+.app-container:has(.feature-panel:not(.codex-panel)) .feature-dock {
+  visibility: hidden !important;
+}
