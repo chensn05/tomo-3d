@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>TOMO · 番茄的3D世界</title>
+    <meta name="description" content="TOMO - 一颗有情绪的番茄，住在你的浏览器里。番茄钟、玄学运势、心情树洞、插画馆。" />
+    <meta name="theme-color" content="#faf3e6" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/png" sizes="32x32" href="brand/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="brand/icon-192.png" />
+    <link rel="apple-touch-icon" href="brand/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="TOMO" />
+    <script type="module" crossorigin src="/tomo-3d/assets/index-BDK4Nl4n.js"></script>
+    <link rel="stylesheet" crossorigin href="/tomo-3d/assets/index-BO_oxnBN.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', async () => {
+          try {
+            // 同域下其它项目（如根作用域）的 SW 会劫持本页，先清理非本项目作用域的注册
+            const regs = await navigator.serviceWorker.getRegistrations()
+            for (const r of regs) {
+              if (!r.scope.includes('/tomo-3d/')) {
+                await r.unregister()
+                const keys = await caches.keys()
+                for (const k of keys) { if (!k.startsWith('tomo-')) await caches.delete(k) }
+              }
+            }
+            await navigator.serviceWorker.register('sw.js')
+          } catch (e) {}
+        })
+      }
+    </script>
+  </body>
+</html>

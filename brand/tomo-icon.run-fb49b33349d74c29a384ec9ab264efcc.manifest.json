@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "run_id": "run-fb49b33349d74c29a384ec9ab264efcc",
+  "case_id": null,
+  "status": "succeeded",
+  "timestamps": {
+    "started_at": "2026-08-30T05:57:15.423631+00:00",
+    "completed_at": "2026-08-30T05:57:56.025920+00:00",
+    "duration_ms": 40602
+  },
+  "policy": {
+    "model_policy_version": "2026-08-20.1",
+    "model_policy_digest": "3f856baa08a1c916c1dc00dbac32a6e6d5a0cc97c86888b27c3ea55d2bff50b7",
+    "capabilities_digest": "fe03361b1e8866d7169ebb2754af99ae8df7f1722fed9042de38f1b54dc5e94b"
+  },
+  "task": {
+    "profile": "illustration",
+    "profile_reason": "explicit",
+    "creative_brief": {
+      "schema_version": 2,
+      "brief_version": "2026-08-09.2",
+      "intent": {
+        "goal": "",
+        "audience": "",
+        "destination": "",
+        "primary_message": ""
+      },
+      "art_direction": {
+        "concept": "",
+        "directions": [],
+        "mood": [],
+        "avoid_cliches": [],
+        "candidate_variation_axes": []
+      },
+      "delivery": {
+        "requirements": []
+      },
+      "references": [],
+      "exploration": {
+        "creative_freedom": "medium"
+      },
+      "execution_policy": {
+        "quality_tier": "quality",
+        "visual_domain": "illustration",
+        "novelty": "balanced"
+      },
+      "provenance": {
+        "/execution_policy/quality_tier": {
+          "source": "default",
+          "confidence": 1.0
+        },
+        "/execution_policy/visual_domain": {
+          "source": "inferred",
+          "confidence": 0.7
+        },
+        "/execution_policy/novelty": {
+          "source": "inferred",
+          "confidence": 0.7
+        },
+        "/exploration/creative_freedom": {
+          "source": "inferred",
+          "confidence": 0.7
+        }
+      }
+    },
+    "quality_plan": {
+      "schema_version": 2,
+      "brief_digest": "e7164e347e83f332d775ccf244ecaf9eabc76df23ad590380fc16e7ab539ff73",
+      "candidate_direction_digest": "e7164e347e83f332d775ccf244ecaf9eabc76df23ad590380fc16e7ab539ff73",
+      "quality_tier": "quality",
+      "creative_freedom": "medium",
+      "candidate_set_id": null,
+      "direction_id": null,
+      "candidate_concept": null,
+      "candidate_index": 1,
+      "candidate_total": 1,
+      "recommended_candidate_count": 2,
+      "candidate_coverage": "insufficient",
+      "candidate_mode": "divergent-then-convergent",
+      "required_diversity_axes": [
+        "concept",
+        "composition_or_camera",
+        "visual_language_or_palette"
+      ],
+      "variation_axes": [],
+      "review_dimensions": [
+        "requirement_fidelity",
+        "concept_specificity",
+        "composition_hierarchy",
+        "craft_detail",
+        "text_typography",
+        "destination_usability",
+        "delight"
+      ],
+      "independent_review_required": true,
+      "maximum_targeted_retries": 2
+    }
+  },
+  "prompt": {
+    "raw_sha256": "3aa8cc8533478c02cb0eace60da9eea7491a346368acc98018906280c34f63a6",
+    "compiled_sha256": "8fc7a82c7fa488f62aedc608b7738f81a891899769aec28d7d050825fd898af4",
+    "template_id": "allin-openai-structured-illustration-v1",
+    "template_version": "2026-08-09.3",
+    "task_profile": "illustration",
+    "task_profile_reason": "explicit",
+    "prompt_mode": "quality",
+    "model_profile_id": "openai-structured-illustration-v1",
+    "hard_constraints": {
+      "facts": [],
+      "exact_text": [],
+      "preserve": [],
+      "forbid": [
+        "text, letters, words, watermark, logo, complex background, gradient banding, 3D render, photo"
+      ]
+    },
+    "creative_brief_schema_version": 2,
+    "creative_brief_version": "2026-08-09.2",
+    "creative_brief_digest": "e7164e347e83f332d775ccf244ecaf9eabc76df23ad590380fc16e7ab539ff73",
+    "candidate_direction_digest": "e7164e347e83f332d775ccf244ecaf9eabc76df23ad590380fc16e7ab539ff73"
+  },
+  "request": {
+    "requested_model": "gpt-image-2",
+    "effective_model": "gpt-image-2",
+    "model_selection": {
+      "mode": "explicit",
+      "model": "gpt-image-2",
+      "reason": "explicit-model",
+      "task_profile": "illustration",
+      "policy_version": "2026-08-20.1",
+      "policy_digest": "3f856baa08a1c916c1dc00dbac32a6e6d5a0cc97c86888b27c3ea55d2bff50b7",
+      "task_profile_reason": "explicit"
+    },
+    "style": null,
+    "default_style_applied": false,
+    "aspect_ratio": "1:1",
+    "effective_extra_params": {
+      "image_ratio": "1:1"
+    },
+    "workspace_id": 0,
+    "project_id": 0,
+    "input_images": [],
+    "timeout": 900,
+    "network_retry_stage": 0
+  },
+  "retry_evidence": {
+    "attempt": 0,
+    "parent_manifest": null,
+    "parent_manifest_sha256": null,
+    "defect_codes": [],
+    "observations": [],
+    "preserved_successes": [],
+    "correction_directives": [],
+    "prompt_delta_sha256": null
+  },
+  "artifacts": {
+    "output": "/home/node/.openclaw/workspace/cowork/tomo-3d/public/brand/tomo-icon.jpg",
+    "prompt": "/home/node/.openclaw/workspace/cowork/tomo-3d/public/brand/tomo-icon.run-fb49b33349d74c29a384ec9ab264efcc.prompt.md",
+    "response": "/home/node/.openclaw/workspace/cowork/tomo-3d/public/brand/tomo-icon.run-fb49b33349d74c29a384ec9ab264efcc.response.json",
+    "payload": null,
+    "manifest": "/home/node/.openclaw/workspace/cowork/tomo-3d/public/brand/tomo-icon.run-fb49b33349d74c29a384ec9ab264efcc.manifest.json"
+  },
+  "quality": {
+    "status": "manual-review-required",
+    "checks": [
+      {
+        "id": "supported-image-bytes",
+        "status": "pass",
+        "actual": "image/jpeg"
+      },
+      {
+        "id": "non-empty-output",
+        "status": "pass",
+        "actual_bytes": 184240
+      },
+      {
+        "id": "expected-aspect-ratio",
+        "status": "pass",
+        "expected": "1:1",
+        "actual": "1024:1024"
+      },
+      {
+        "id": "minimum-pixel-dimension",
+        "status": "pass",
+        "minimum": 512,
+        "actual": 1024
+      },
+      {
+        "id": "output-not-byte-identical-to-input",
+        "status": "pass",
+        "input_count": 0
+      },
+      {
+        "id": "compiled-prompt-retains-exact-text",
+        "status": "pass",
+        "missing_count": 0
+      }
+    ],
+    "manual_checks": [
+      {
+        "id": "requirement-fidelity",
+        "status": "not-checked"
+      },
+      {
+        "id": "concept-specificity",
+        "status": "not-checked"
+      },
+      {
+        "id": "composition-hierarchy",
+        "status": "not-checked"
+      },
+      {
+        "id": "craft-detail",
+        "status": "not-checked"
+      },
+      {
+        "id": "text-typography",
+        "status": "not-checked"
+      },
+      {
+        "id": "destination-usability",
+        "status": "not-checked"
+      },
+      {
+        "id": "delight",
+        "status": "not-checked"
+      }
+    ],
+    "output": {
+      "sha256": "5f4a38cc17377a0d014ebf031868f1a8d13f837aaaf3b09de54c5ee05ef666ae",
+      "bytes": 184240,
+      "mime_type": "image/jpeg",
+      "pixel_width": 1024,
+      "pixel_height": 1024
+    }
+  },
+  "response": {
+    "model": "gpt-image-2",
+    "conversation_id": 3381442,
+    "message_id": 17452163
+  }
+}

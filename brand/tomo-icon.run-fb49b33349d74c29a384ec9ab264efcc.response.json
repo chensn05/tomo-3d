@@ -1,0 +1,48 @@
+{
+  "conversation_id": 3381442,
+  "message_id": 17452163,
+  "contents": [
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": null,
+          "inlineData": {
+            "mimeType": "image/jpeg",
+            "data": null,
+            "fileUuid": "sh0ht2hn",
+            "thumbFileId": "ozmbqryo"
+          },
+          "thought": null
+        }
+      ]
+    }
+  ],
+  "usage_metadata": null,
+  "model_info": {
+    "model": "gpt-image-2",
+    "created": 1788069474,
+    "image_count": 1,
+    "usage": {
+      "input_tokens": 403,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 403
+      },
+      "output_tokens": 1756,
+      "output_tokens_details": {
+        "image_tokens": 1756,
+        "text_tokens": 0
+      },
+      "total_tokens": 2159
+    }
+  },
+  "output_image_list": [
+    {
+      "id": "sh0ht2hn",
+      "name": "sh0ht2hn.jpeg",
+      "size": 184240,
+      "thumbFileId": "ozmbqryo"
+    }
+  ]
+}
